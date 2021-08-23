@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="1.main" target="1.8" />
       <module name="1.test" target="1.8" />
+      <module name="sandbox.1.main" target="12" />
+      <module name="sandbox.1.test" target="12" />
     </bytecodeTargetLevel>
   </component>
 </project>
