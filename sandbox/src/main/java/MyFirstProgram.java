@@ -10,7 +10,11 @@ public class MyFirstProgram {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(2, 2);
 
-        System.out.println("Distance between two coordinates: " +  distance(p1, p2));
+        System.out.println("FUNCTION: Distance between two coordinates: " +  distance(p1, p2));
+
+        System.out.println("METHOD: Distance between two coordinates: " +  p1.distance(p2));
+        System.out.println("METHOD: Distance between two coordinates: " +  p2.distance(p1));
+
     }
 
 
