@@ -1,3 +1,5 @@
+package ru.qa.test.sandbox;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
