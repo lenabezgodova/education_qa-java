@@ -16,14 +16,14 @@ public class GroupCreationTest {
         Thread.sleep(5000);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/");
-        login("admin", "secret");
+        login(new LoginData("admin", "secret"));
     }
 
-    private void login(String username, String password) {
+    private void login(LoginData loginData) {
         driver.findElement(By.name("user")).clear();
-        driver.findElement(By.name("user")).sendKeys(username);
+        driver.findElement(By.name("user")).sendKeys(loginData.getUsername());
         driver.findElement(By.name("pass")).clear();
-        driver.findElement(By.name("pass")).sendKeys(password);
+        driver.findElement(By.name("pass")).sendKeys(loginData.getPassword());
         driver.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
