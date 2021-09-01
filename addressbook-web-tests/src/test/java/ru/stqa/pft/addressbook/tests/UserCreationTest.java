@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +7,8 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import ru.stqa.pft.addressbook.model.LoginData;
+import ru.stqa.pft.addressbook.model.UserData;
 
 
 public class UserCreationTest {
@@ -14,7 +16,7 @@ public class UserCreationTest {
 
     private WebDriver driver;
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\lenab\\IdeaProjects\\education_qa-java\\addressbook-web-tests\\drivers\\geckodriver.exe");
         driver = new FirefoxDriver();
@@ -92,7 +94,7 @@ public class UserCreationTest {
         driver.findElement(By.linkText("add new")).click();
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
     }
