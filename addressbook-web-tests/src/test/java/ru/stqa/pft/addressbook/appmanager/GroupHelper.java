@@ -4,46 +4,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper {
-    private WebDriver driver;
+public class GroupHelper extends HelperBase {
 
     public GroupHelper(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void returnToGroupPage() {
-        driver.findElement(By.linkText("group page")).click();
+        clickOnTheElement(By.linkText("group page"));
     }
 
     public void submitGroupCreation(String buttonName) {
-        driver.findElement(By.name(buttonName)).click();
+        clickOnTheElement(By.name(buttonName));
     }
 
     public void goLogOut(String buttonName) {
-        driver.findElement(By.linkText(buttonName)).click();
+        clickOnTheElement(By.linkText(buttonName));
     }
 
     public void fillGroupForm(GroupData groupData) {
-        driver.findElement(By.name("group_name")).click();
-        driver.findElement(By.name("group_name")).clear();
-        driver.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
-        driver.findElement(By.name("group_header")).click();
-        driver.findElement(By.name("group_header")).clear();
-        driver.findElement(By.name("group_header")).sendKeys(groupData.getGroupHeader());
-        driver.findElement(By.name("group_footer")).click();
-        driver.findElement(By.name("group_footer")).clear();
-        driver.findElement(By.name("group_footer")).sendKeys(groupData.getGroupFooter());
+        typeValueInTheField(By.name("group_name"), groupData.getGroupName());
+        typeValueInTheField(By.name("group_header"), groupData.getGroupHeader());
+        typeValueInTheField(By.name("group_footer"), groupData.getGroupFooter());
     }
 
+
     public void initGroupCreation() {
-        driver.findElement(By.name("new")).click();
+        clickOnTheElement(By.name("new"));
     }
 
     public void deteleSelectedGroups() {
-        driver.findElement(By.xpath("//div[@id='content']/form/input[5]")).click();
+        clickOnTheElement(By.xpath("//div[@id='content']/form/input[5]"));
     }
 
     public void selectGroup() {
-        driver.findElement(By.name("selected[]")).click();
+        clickOnTheElement(By.name("selected[]"));
     }
+
 }
