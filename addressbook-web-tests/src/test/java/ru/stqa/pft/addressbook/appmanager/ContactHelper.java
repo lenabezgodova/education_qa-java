@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.UserData;
 
-public class ContactHelper {
+public class ContactHelper extends HelperBase{
 
-    private WebDriver driver;
 
     public ContactHelper(WebDriver driver) {
-        this.driver = driver;
+
+        super(driver);
     }
 
     public void workWithDropDownBox() {
@@ -72,4 +72,27 @@ public class ContactHelper {
         driver.findElement(By.linkText("add new")).click();
     }
 
+    public void selectUser() {
+        clickOnTheElement(By.name("selected[]"));
+    }
+
+    public void deleteSelectedUser() {
+        clickOnTheElement(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void accertDialogWindow(){
+        driver.switchTo().alert().accept();
+    }
+
+    public void declainDialogWindow(){
+        driver.switchTo().alert().dismiss();
+    }
+
+    public void initUserModification() {
+        clickOnTheElement(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitUserModification() {
+        clickOnTheElement(By.name("update"));
+    }
 }

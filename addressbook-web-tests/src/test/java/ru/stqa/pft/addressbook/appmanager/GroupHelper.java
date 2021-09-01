@@ -33,6 +33,10 @@ public class GroupHelper extends HelperBase {
         clickOnTheElement(By.name("new"));
     }
 
+    public void initGroupModification(){
+        clickOnTheElement(By.name("edit"));
+    }
+
     public void deteleSelectedGroups() {
         clickOnTheElement(By.xpath("//div[@id='content']/form/input[5]"));
     }
@@ -41,4 +45,7 @@ public class GroupHelper extends HelperBase {
         clickOnTheElement(By.name("selected[]"));
     }
 
+    public void submitGroupModification() {
+        clickOnTheElement(By.name("update"));
+    }
 }
