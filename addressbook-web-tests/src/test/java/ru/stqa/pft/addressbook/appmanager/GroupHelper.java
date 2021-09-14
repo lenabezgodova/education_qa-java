@@ -48,4 +48,18 @@ public class GroupHelper extends HelperBase {
     public void submitGroupModification() {
         clickOnTheElement(By.name("update"));
     }
+
+    public void createGroup(GroupData groupData) {
+        initGroupCreation();
+        //здесь создается новый объект GroupData - сразу заполняются значения (есть же конструктор)
+        fillGroupForm(groupData);
+        submitGroupCreation("submit");
+        returnToGroupPage();
+
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+
+    }
 }

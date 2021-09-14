@@ -43,8 +43,9 @@ public class HelperBase {
            driver.findElement(locator);
            return true;
         } catch (NoSuchElementException ex){
+            System.out.println("------------------------");
             System.out.println(ex.getSupportUrl());
-            System.out.println(ex.getLocalizedMessage());
+            System.out.println("------------------------");
             return false;
         }
     }
