@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 
 public class ContactHelper extends HelperBase{
@@ -29,43 +30,19 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void fullUserCreationForm(UserData userData) {
-        driver.findElement(By.name("firstname")).click();
-        driver.findElement(By.name("firstname")).clear();
-        driver.findElement(By.name("firstname")).sendKeys(userData.getFirstName());
-        driver.findElement(By.name("middlename")).click();
-        driver.findElement(By.name("middlename")).clear();
-        driver.findElement(By.name("middlename")).sendKeys(userData.getMiddleName());
-        driver.findElement(By.name("lastname")).click();
-        driver.findElement(By.name("lastname")).clear();
-        driver.findElement(By.name("lastname")).sendKeys(userData.getLastName());
-        driver.findElement(By.name("nickname")).click();
-        driver.findElement(By.name("nickname")).clear();
-        driver.findElement(By.name("nickname")).sendKeys(userData.getNickName());
-//        driver.findElement(By.name("photo")).click();
-//        driver.findElement(By.name("photo")).clear();
-//        driver.findElement(By.name("photo")).sendKeys("C:\\fakepath\\ПЛАН-НА-МЕСЯЦ.jpg");
-        driver.findElement(By.name("title")).click();
-        driver.findElement(By.name("title")).clear();
-        driver.findElement(By.name("title")).sendKeys(userData.getTitle());
-        driver.findElement(By.name("company")).click();
-        driver.findElement(By.name("company")).clear();
-        driver.findElement(By.name("company")).sendKeys(userData.getCompanyName());
-        driver.findElement(By.name("address")).click();
-        driver.findElement(By.name("address")).clear();
-        driver.findElement(By.name("address")).sendKeys(userData.getAddressMain());
-        driver.findElement(By.name("mobile")).click();
-        driver.findElement(By.name("mobile")).clear();
-        driver.findElement(By.name("mobile")).sendKeys(userData.getMobile());
-        driver.findElement(By.name("fax")).click();
-        driver.findElement(By.name("fax")).clear();
-        driver.findElement(By.name("fax")).sendKeys(userData.getFax());
-        driver.findElement(By.name("email")).click();
-        driver.findElement(By.name("email")).clear();
-        driver.findElement(By.name("email")).sendKeys(userData.getEmailMain());
-        driver.findElement(By.name("homepage")).click();
-        driver.findElement(By.name("homepage")).clear();
-        driver.findElement(By.name("homepage")).sendKeys(userData.getHomePage());
+    public void fullUserCreationForm(UserData userData, boolean creation) {
+        typeValueInTheField(By.name("firstname"), userData.getFirstName());
+        typeValueInTheField(By.name("middlename"),userData.getMiddleName());
+        typeValueInTheField(By.name("lastname"), userData.getLastName());
+
+        if (creation){
+            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+
+
+
     }
 
     public void initUserCreation() {
