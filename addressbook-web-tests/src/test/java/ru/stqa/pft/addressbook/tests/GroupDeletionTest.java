@@ -17,9 +17,7 @@ public class GroupDeletionTest extends TestBase {
 
 
         app.getGroupHelper().selectGroup();
-        Thread.sleep(5000);
         app.getGroupHelper().deteleSelectedGroups();
-        Thread.sleep(5000);
         app.getGroupHelper().returnToGroupPage();
     }
 

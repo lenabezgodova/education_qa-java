@@ -26,7 +26,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void submitUserCreation() {
-        driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+        driver.findElement(By.name("submit")).click();
     }
 
 
@@ -40,8 +40,6 @@ public class ContactHelper extends HelperBase{
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-
-
 
     }
 
@@ -71,5 +69,18 @@ public class ContactHelper extends HelperBase{
 
     public void submitUserModification() {
         clickOnTheElement(By.name("update"));
+    }
+
+
+    public void createNewUser(UserData userData, boolean b) {
+        initUserCreation();
+        fullUserCreationForm(userData, b);
+        workWithDropDownBox();
+        submitUserCreation();
+        gotoHomePage();
+    }
+
+    public boolean isThereAUser() {
+        return isElementPresent(By.xpath("//img[@alt='Edit']"));
     }
 }
