@@ -79,16 +79,17 @@ public class GroupHelper extends HelperBase {
         List<GroupData> groups = new ArrayList<GroupData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
 
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+        System.out.println("elements:  " + elements);
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             GroupData group = new GroupData(id ,name, null, null);
             groups.add(group);
-            System.out.println("-----------> " + name);
-            System.out.println("-----------> " + group);
-            System.out.println("-----------> " + group.getGroupName());
-            System.out.println("-----------> " + group.getGroupFooter());
-            System.out.println("*************************************** ");
+            //System.out.println("-----------> " + name);
+            //System.out.println("-----------> " + group);
+            //System.out.println("-----------> " + group.getGroupName());
+            //System.out.println("-----------> " + group.getGroupFooter());
+            //System.out.println("*************************************** ");
         }
 
         return groups;

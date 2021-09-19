@@ -24,11 +24,13 @@ public class GroupDeletionTest extends TestBase {
         app.getGroupHelper().returnToGroupPage();
         List<GroupData> after = app.getGroupHelper().getGroupList();
 
-        System.out.println("before " + before + " :After: " + after);
+
+        //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
         Assert.assertEquals(after.size(), before.size()-1);
 
         before.remove(before.size() - 1);
         Assert.assertEquals(before, after);
+
 
         }
 

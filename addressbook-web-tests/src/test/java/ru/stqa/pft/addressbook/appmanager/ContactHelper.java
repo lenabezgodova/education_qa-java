@@ -51,9 +51,10 @@ public class ContactHelper extends HelperBase{
         driver.findElement(By.linkText("add new")).click();
     }
 
-    public void selectUser() {
-        clickOnTheElement(By.name("selected[]"));
+    public void selectUser(int index) {
+        driver.findElements(By.name("selected[]")).get(index).click();
     }
+
 
     public void deleteSelectedUser() {
         clickOnTheElement(By.xpath("//input[@value='Delete']"));
@@ -96,22 +97,35 @@ public class ContactHelper extends HelperBase{
 
         List<UserData> users = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже UserData - тип данных
         int numberOfUsers = getUserCount();
+        System.out.println("numberOfUsers: " + numberOfUsers);
         List<WebElement> elements = new ArrayList<WebElement>();
 
-        for (int i = 2; i <= numberOfUsers; i++){
+        for (int i = 2; i <= numberOfUsers+1; i++){
             String xPath = "//*[@id=\"maintable\"]/tbody/tr["+ i +"]/td[2]";
             System.out.println("------xPath-----> " + xPath);
-
             WebElement element = driver.findElement(By.xpath(xPath));
             elements.add(element);
         }
-        //List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[2]"));
 
         for (WebElement element : elements){
             String name = element.getText();
-            UserData user = new UserData(name, null, null, null);
+            UserData user = new UserData(null, null, name, null);
             users.add(user);
         }
+
+
+        // table has rows   - TODO
+        List<WebElement> findOnRows = driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[5]"));
+        //System.out.println("------findOnRows-----> " + findOnRows);
+        for (WebElement element : findOnRows){
+            String name = element.getText();
+            //System.out.println("element.getText()---> " + name);
+            //System.out.println("element.getText()---> " + element.getAttribute("id"));
+            //UserData user = new UserData(name, null, null, null);
+            //users.add(user);
+        }
+
+
 
         return users;
     }
