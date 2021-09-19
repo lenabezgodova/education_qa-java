@@ -29,4 +29,14 @@ public class UserData {
     public String getGroup() {
         return group;
     }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "firstName='" + firstName + '\'' +
+//                ", middleName='" + middleName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", group='" + group + '\'' +
+                '}';
+    }
 }

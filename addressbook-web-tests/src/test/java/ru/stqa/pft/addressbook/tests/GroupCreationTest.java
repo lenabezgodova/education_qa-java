@@ -4,7 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTest extends TestBase {
@@ -14,14 +15,35 @@ public class GroupCreationTest extends TestBase {
     public void testGroupCreation() throws Exception {
         app.getNavigationHelper().gotoGroupPage();
 
-        List<GroupData> before = app.getGroupHelper().gotoGroupPage();
+        List<GroupData> before = app.getGroupHelper().getGroupList();
 
-        app.getGroupHelper().createGroup(new GroupData("Name", "test1", null));
+        GroupData group = new GroupData("test1", "header", "footer");
+        app.getGroupHelper().createGroup(group);
 
-        int after = app.getGroupHelper().getGroupCount();
-        Assert.assertEquals(after, before.size() + 1);
+        List<GroupData> after = app.getGroupHelper().getGroupList();
+        Assert.assertEquals(after.size(), before.size() + 1);
 
-        Thread.sleep(5000);
+
+        int max = 0;
+
+        for (GroupData g: after){
+            if (g.getId() > max){
+                max = g.getId();
+            }
+        }
+
+        // another realization - how to find max value
+        int maxLambda = after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId();
+        System.out.println("maxLambda: " + maxLambda );
+
+        group.setId(max);
+        before.add(group);
+        
+        Assert.assertEquals(after.size(), before.size());
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+
+        Thread.sleep(3000);
         app.getGroupHelper().goLogOut("Logout");
     }
 

@@ -2,9 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase{
 
@@ -82,5 +86,33 @@ public class ContactHelper extends HelperBase{
 
     public boolean isThereAUser() {
         return isElementPresent(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public int getUserCount() {
+        return driver.findElements(By.name("selected[]")).size();
+    }
+
+    public List<UserData> getListUsers() {
+
+        List<UserData> users = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже UserData - тип данных
+        int numberOfUsers = getUserCount();
+        List<WebElement> elements = new ArrayList<WebElement>();
+
+        for (int i = 2; i <= numberOfUsers; i++){
+            String xPath = "//*[@id=\"maintable\"]/tbody/tr["+ i +"]/td[2]";
+            System.out.println("------xPath-----> " + xPath);
+
+            WebElement element = driver.findElement(By.xpath(xPath));
+            elements.add(element);
+        }
+        //List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[2]"));
+
+        for (WebElement element : elements){
+            String name = element.getText();
+            UserData user = new UserData(name, null, null, null);
+            users.add(user);
+        }
+
+        return users;
     }
 }
