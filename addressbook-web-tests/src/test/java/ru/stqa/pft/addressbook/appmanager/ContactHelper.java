@@ -68,8 +68,9 @@ public class ContactHelper extends HelperBase{
         driver.switchTo().alert().dismiss();
     }
 
-    public void initUserModification() {
-        clickOnTheElement(By.xpath("//img[@alt='Edit']"));
+    public void initUserModification(int index) {
+        //clickOnTheElement(By.xpath("//img[@alt='Edit']"));
+        driver.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
     public void submitUserModification() {
@@ -95,38 +96,41 @@ public class ContactHelper extends HelperBase{
 
     public List<UserData> getListUsers() {
 
-        List<UserData> users = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже UserData - тип данных
+        List<UserData> usersOnlyLatName = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже UserData - тип данных
         int numberOfUsers = getUserCount();
         System.out.println("numberOfUsers: " + numberOfUsers);
         List<WebElement> elements = new ArrayList<WebElement>();
 
         for (int i = 2; i <= numberOfUsers+1; i++){
             String xPath = "//*[@id=\"maintable\"]/tbody/tr["+ i +"]/td[2]";
-            System.out.println("------xPath-----> " + xPath);
             WebElement element = driver.findElement(By.xpath(xPath));
             elements.add(element);
-        }
-
-        for (WebElement element : elements){
             String name = element.getText();
             UserData user = new UserData(null, null, name, null);
-            users.add(user);
+            usersOnlyLatName.add(user);
+
+        }
+        return usersOnlyLatName;
+    }
+
+    public List<UserData> getListUsersWithInfo(){
+        List<UserData> usersWithInfo = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
+
+        List<WebElement> elements = driver.findElements(By.name("entry"));
+
+        for (WebElement element: elements){
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String lastname = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            System.out.println("name: " + lastname);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            System.out.println("id: " + id);
+            UserData user = new UserData(id, name, null, lastname, null);
+            usersWithInfo.add(user);
+
         }
 
+        return usersWithInfo;
 
-        // table has rows   - TODO
-        List<WebElement> findOnRows = driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[5]"));
-        //System.out.println("------findOnRows-----> " + findOnRows);
-        for (WebElement element : findOnRows){
-            String name = element.getText();
-            //System.out.println("element.getText()---> " + name);
-            //System.out.println("element.getText()---> " + element.getAttribute("id"));
-            //UserData user = new UserData(name, null, null, null);
-            //users.add(user);
-        }
-
-
-
-        return users;
     }
 }

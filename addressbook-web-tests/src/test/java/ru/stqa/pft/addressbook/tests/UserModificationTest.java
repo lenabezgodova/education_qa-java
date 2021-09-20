@@ -1,7 +1,11 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
+
+import java.util.HashSet;
+import java.util.List;
 
 public class UserModificationTest extends TestBase{
 
@@ -14,10 +18,27 @@ public class UserModificationTest extends TestBase{
         }
         Thread.sleep(5000);
 
-        app.getContactHelper().initUserModification();
-        app.getContactHelper().fullUserCreationForm(new UserData("Ivanov", "Ivan", "Ivanovich", null), false);
+        List<UserData> before = app.getContactHelper().getListUsersWithInfo();
+        System.out.println("before: size " + before.size() + " -->" + before);
+
+        app.getContactHelper().initUserModification(before.size() - 1);
+
+        UserData user = new UserData(before.get(before.size() - 1).getId(), "Ivanov", "Ivan", "Ivanovich", null);
+        app.getContactHelper().fullUserCreationForm(user, false);
         app.getContactHelper().submitUserModification();
-        app.getContactHelper().gotoHomePage();
+        app.getNavigationHelper().gotoPageHome();
+
+        List<UserData> after = app.getContactHelper().getListUsersWithInfo();
+        System.out.println("after: " + after);
+
+        before.remove(before.size() - 1);
+        before.add(user);
+
+        Assert.assertEquals(after.size(), before.size());
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        System.out.println("new HashSet<Object>(before) " + after);
+        System.out.println("new HashSet<Object>(after) " + after);
+
     }
 
 }
