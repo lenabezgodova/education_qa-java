@@ -50,10 +50,9 @@ public class UserData {
     @Override
     public String toString() {
         return "UserData{" +
-                "firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", group='" + group + '\'' +
                 '}';
     }
 

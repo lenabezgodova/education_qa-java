@@ -16,13 +16,12 @@ public class UserModificationTest extends TestBase{
         if (! app.getContactHelper().isThereAUser()){
             app.getContactHelper().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
         }
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         List<UserData> before = app.getContactHelper().getListUsersWithInfo();
         System.out.println("before: size " + before.size() + " -->" + before);
 
         app.getContactHelper().initUserModification(before.size() - 1);
-
         UserData user = new UserData(before.get(before.size() - 1).getId(), "Ivanov", "Ivan", "Ivanovich", null);
         app.getContactHelper().fullUserCreationForm(user, false);
         app.getContactHelper().submitUserModification();
