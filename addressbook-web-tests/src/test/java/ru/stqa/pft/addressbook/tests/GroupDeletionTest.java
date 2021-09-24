@@ -9,31 +9,29 @@ import java.util.List;
 
 public class GroupDeletionTest extends TestBase {
 
+    //подготовка состояния для тестов, которые отвечают за удаление элемента
+    @BeforeMethod
+    public void enusrePreconditions(){
+        app.goTo().onGroupPage();
+        if (app.group().list().size() == 0) {
+            app.group().create(new GroupData("Name", "test1", null));
+        }
+    }
+
     @Test
     public void testGroupDeletion() throws InterruptedException {
-        app.getNavigationHelper().gotoGroupPage();
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
 
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("Name", "test1", null));
-        }
-        Thread.sleep(5000);
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-
-        app.getGroupHelper().selectGroup(before.size()-1);
-        app.getGroupHelper().deteleSelectedGroups();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
-
+        app.group().delete(index);
+        List<GroupData> after = app.group().list();
 
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
-        Assert.assertEquals(after.size(), before.size()-1);
-
-        before.remove(before.size() - 1);
+        Assert.assertEquals(after.size(),  before.size() - 1);
+        before.remove(index);
         Assert.assertEquals(before, after);
 
-
         }
-
 
 
 

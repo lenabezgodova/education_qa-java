@@ -55,13 +55,27 @@ public class GroupHelper extends HelperBase {
         clickOnTheElement(By.name("update"));
     }
 
-    public void createGroup(GroupData groupData) {
+    public void create(GroupData groupData) {
         initGroupCreation();
         //здесь создается новый объект GroupData - сразу заполняются значения (есть же конструктор)
         fillGroupForm(groupData);
         submitGroupCreation("submit");
         returnToGroupPage();
 
+    }
+
+    public void modify(int index, GroupData group) {
+        selectGroup(index); //modify the last group
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
+
+    public void delete(int index) {
+        selectGroup(index);
+        deteleSelectedGroups();
+        returnToGroupPage();
     }
 
     public boolean isThereAGroup() {
@@ -74,7 +88,7 @@ public class GroupHelper extends HelperBase {
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
+    public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
 
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));

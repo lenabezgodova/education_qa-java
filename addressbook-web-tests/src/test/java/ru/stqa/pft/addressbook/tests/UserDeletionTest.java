@@ -10,7 +10,7 @@ public class UserDeletionTest extends TestBase {
 
     @Test(enabled = false)
     public void testDeletionGroup() throws InterruptedException {
-        app.getNavigationHelper().gotoPageHome();
+        app.goTo().onPageHome();
 
         if (! app.getContactHelper().isThereAUser()){
             app.getContactHelper().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
@@ -23,7 +23,7 @@ public class UserDeletionTest extends TestBase {
         app.getContactHelper().deleteSelectedUser();
         app.getContactHelper().accertDialogWindow();
         Thread.sleep(3000);
-        app.getNavigationHelper().gotoPageHome();
+        app.goTo().onPageHome();
         Thread.sleep(3000);
 
         List<UserData> after = app.getContactHelper().getListUsers();

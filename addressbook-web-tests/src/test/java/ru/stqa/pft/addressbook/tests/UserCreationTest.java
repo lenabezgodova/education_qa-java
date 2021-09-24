@@ -12,7 +12,7 @@ public class UserCreationTest extends TestBase{
 
     @Test(enabled = false)
     public void testCreateUser() throws Exception {
-        app.getNavigationHelper().gotoPageHome();
+        app.goTo().onPageHome();
         Thread.sleep(5000);
 
         List<UserData> before = app.getContactHelper().getListUsersWithInfo();

@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -9,27 +10,30 @@ import java.util.List;
 
 public class GroupModificationTest extends TestBase {
 
+    //подготовка состояния для тестов, которые отвечают за модификацию
+    @BeforeMethod
+    public void enusrePreconditions(){
+        app.goTo().onGroupPage();
+        if (app.group().list().size() == 0) {
+            app.group().create(new GroupData("Name", "test1", null));
+        }
+    }
+
     @Test
     public void testGroupModification() throws InterruptedException {
-        app.getNavigationHelper().gotoGroupPage();
 
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("Name", "test1", null));
-        }
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
+        GroupData group = new GroupData(before.get(index).getId(),"modif", "new", "new");
 
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1); //modify the last group
-        app.getGroupHelper().initGroupModification();
-        GroupData group = new GroupData(before.get(before.size() - 1).getId(),"modif", "new", "new");
-        app.getGroupHelper().fillGroupForm(group);
-        app.getGroupHelper().submitGroupModification();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        app.group().modify(index, group);
 
-        before.remove(before.size() - 1);
+        List<GroupData> after = app.group().list();
+        before.remove(index);
         before.add(group);
-
         Assert.assertEquals(after.size(), before.size());
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
+
+
 }

@@ -11,7 +11,7 @@ public class UserModificationTest extends TestBase{
 
     @Test(enabled = false)
     public void testUpdateUser() throws Exception {
-        app.getNavigationHelper().gotoPageHome();
+        app.goTo().onPageHome();
 
         if (! app.getContactHelper().isThereAUser()){
             app.getContactHelper().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
@@ -25,7 +25,7 @@ public class UserModificationTest extends TestBase{
         UserData user = new UserData(before.get(before.size() - 1).getId(), "Ivanov", "Ivan", "Ivanovich", null);
         app.getContactHelper().fullUserCreationForm(user, false);
         app.getContactHelper().submitUserModification();
-        app.getNavigationHelper().gotoPageHome();
+        app.goTo().onPageHome();
 
         List<UserData> after = app.getContactHelper().getListUsersWithInfo();
         System.out.println("after: " + after);
