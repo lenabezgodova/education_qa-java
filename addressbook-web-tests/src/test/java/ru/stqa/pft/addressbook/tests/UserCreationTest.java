@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserCreationTest extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void testCreateUser() throws Exception {
         app.getNavigationHelper().gotoPageHome();
         Thread.sleep(5000);

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserDeletionTest extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testDeletionGroup() throws InterruptedException {
         app.getNavigationHelper().gotoPageHome();
 

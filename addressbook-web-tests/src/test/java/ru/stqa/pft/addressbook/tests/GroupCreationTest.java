@@ -44,7 +44,6 @@ public class GroupCreationTest extends TestBase {
 
 
         Thread.sleep(3000);
-        app.getGroupHelper().goLogOut("Logout");
     }
 
 }
