@@ -10,16 +10,16 @@ import java.util.List;
 
 public class UserCreationTest extends TestBase{
 
-    @Test(enabled = false)
+    @Test
     public void testCreateUser() throws Exception {
         app.goTo().onPageHome();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
 
-        List<UserData> before = app.getContactHelper().getListUsersWithInfo();
+        List<UserData> before = app.contact().getListUsersWithInfo();
 
         UserData user = new UserData("first name", null, "Zz-last name", "test1");
-        app.getContactHelper().createNewUser(user, true);
-        List<UserData> after = app.getContactHelper().getListUsersWithInfo();
+        app.contact().createNewUser(user, true);
+        List<UserData> after = app.contact().getListUsersWithInfo();
 
         //проверка на размер - пока отличается
         Assert.assertEquals(after.size(), before.size() + 1);
@@ -28,7 +28,6 @@ public class UserCreationTest extends TestBase{
         System.out.println("before - not add a new user ---> " + before);
 
         before.add(user);
-
         Assert.assertEquals(after.size(), before.size());
         System.out.println("before + added a new one ---> " + before);
         System.out.println("after  ---> " + after);

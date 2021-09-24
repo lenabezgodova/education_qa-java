@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
 
@@ -9,28 +10,30 @@ import java.util.List;
 
 public class UserModificationTest extends TestBase{
 
-    @Test(enabled = false)
-    public void testUpdateUser() throws Exception {
+    @BeforeTest
+    public void enusrePreconditions(){
         app.goTo().onPageHome();
 
-        if (! app.getContactHelper().isThereAUser()){
-            app.getContactHelper().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
+        if (! app.contact().isThereAUser()){
+            app.contact().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
         }
-        Thread.sleep(3000);
+    }
 
-        List<UserData> before = app.getContactHelper().getListUsersWithInfo();
+    @Test
+    public void testUpdateUser() throws Exception {
+
+        List<UserData> before = app.contact().getListUsersWithInfo();
+        int index = before.size() - 1;
+        UserData user = new UserData(before.get(index).getId(), "Ivanov", "Ivan", "Ivanovich", null);
         System.out.println("before: size " + before.size() + " -->" + before);
 
-        app.getContactHelper().initUserModification(before.size() - 1);
-        UserData user = new UserData(before.get(before.size() - 1).getId(), "Ivanov", "Ivan", "Ivanovich", null);
-        app.getContactHelper().fullUserCreationForm(user, false);
-        app.getContactHelper().submitUserModification();
+        app.contact().modify(index, user);
         app.goTo().onPageHome();
 
-        List<UserData> after = app.getContactHelper().getListUsersWithInfo();
+        List<UserData> after = app.contact().getListUsersWithInfo();
         System.out.println("after: " + after);
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         before.add(user);
 
         Assert.assertEquals(after.size(), before.size());
@@ -39,5 +42,7 @@ public class UserModificationTest extends TestBase{
         System.out.println("new HashSet<Object>(after) " + after);
 
     }
+
+
 
 }

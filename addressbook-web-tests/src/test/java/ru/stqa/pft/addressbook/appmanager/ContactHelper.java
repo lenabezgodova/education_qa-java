@@ -86,6 +86,19 @@ public class ContactHelper extends HelperBase{
         gotoHomePage();
     }
 
+    public void modify(int index, UserData user) {
+        initUserModification(index);
+        fullUserCreationForm(user, false);
+        submitUserModification();
+    }
+
+    public void delete(int index) throws InterruptedException {
+        selectUser(index);
+        deleteSelectedUser();
+        accertDialogWindow();
+        Thread.sleep(3000);
+    }
+
     public boolean isThereAUser() {
         return isElementPresent(By.xpath("//img[@alt='Edit']"));
     }
