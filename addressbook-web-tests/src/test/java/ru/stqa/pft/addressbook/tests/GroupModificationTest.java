@@ -15,7 +15,7 @@ public class GroupModificationTest extends TestBase {
     public void enusrePreconditions(){
         app.goTo().onGroupPage();
         if (app.group().list().size() == 0) {
-            app.group().create(new GroupData("Name", "test1", null));
+            app.group().create(new GroupData().withGroupName("Name").withGroupHeader("test1"));
         }
     }
 
@@ -24,10 +24,9 @@ public class GroupModificationTest extends TestBase {
 
         List<GroupData> before = app.group().list();
         int index = before.size() - 1;
-        GroupData group = new GroupData(before.get(index).getId(),"modif", "new", "new");
-
+        GroupData group = new GroupData().withId(before.get(index).getId()).withGroupName("modif")
+                .withGroupHeader("new").withGroupFooter("new");
         app.group().modify(index, group);
-
         List<GroupData> after = app.group().list();
         before.remove(index);
         before.add(group);

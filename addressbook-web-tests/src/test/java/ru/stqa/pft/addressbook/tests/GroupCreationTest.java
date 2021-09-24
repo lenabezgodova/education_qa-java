@@ -17,7 +17,7 @@ public class GroupCreationTest extends TestBase {
 
         List<GroupData> before = app.group().list();
 
-        GroupData group = new GroupData("test1", "header", "footer");
+        GroupData group = new GroupData().withGroupName("test1").withGroupHeader("header").withGroupFooter("footer");
         app.group().create(group);
 
         List<GroupData> after = app.group().list();
@@ -36,13 +36,10 @@ public class GroupCreationTest extends TestBase {
         int maxLambda = after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId();
         System.out.println("maxLambda: " + maxLambda );
 
-        group.setId(max);
+        group.withId(max);
         before.add(group);
-        
         Assert.assertEquals(after.size(), before.size());
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
-
         Thread.sleep(3000);
     }
 
