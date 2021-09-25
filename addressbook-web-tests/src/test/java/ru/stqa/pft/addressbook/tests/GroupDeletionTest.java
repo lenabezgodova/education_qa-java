@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -14,7 +13,7 @@ public class GroupDeletionTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         app.goTo().groupPage();
-        if (app.group().list().size() == 0) {
+        if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withGroupName("Name").withGroupHeader("test1"));
         }
     }
@@ -32,7 +31,7 @@ public class GroupDeletionTest extends TestBase {
         Assert.assertEquals(after.size(),  before.size() - 1);
         before.remove(deletedGroup); //удалять отсюда надо именно группу
         Assert.assertEquals(before, after);
-        
+
         System.out.println("after ---> " + after);
         }
 

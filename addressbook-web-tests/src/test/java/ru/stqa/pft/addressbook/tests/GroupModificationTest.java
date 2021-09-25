@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTest extends TestBase {
 
@@ -14,7 +13,7 @@ public class GroupModificationTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         app.goTo().groupPage();
-        if (app.group().list().size() == 0) {
+        if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withGroupName("Name").withGroupHeader("test1"));
         }
     }
@@ -22,16 +21,20 @@ public class GroupModificationTest extends TestBase {
     @Test
     public void testGroupModification() throws InterruptedException {
 
-        List<GroupData> before = app.group().list();
-        int index = before.size() - 1;
-        GroupData group = new GroupData().withId(before.get(index).getId()).withGroupName("modif")
+        Set<GroupData> before = app.group().all();
+        GroupData modifiedGroup = before.iterator().next();
+        System.out.println("modifiedGroup ----> " + modifiedGroup);
+        //int index = before.size() - 1;
+        GroupData group = new GroupData().withId(modifiedGroup.getId()).withGroupName("modif")
                 .withGroupHeader("new").withGroupFooter("new");
-        app.group().modify(index, group);
-        List<GroupData> after = app.group().list();
-        before.remove(index);
+        app.group().modify(group);
+        Set<GroupData> after = app.group().all();
+        before.remove(modifiedGroup);
         before.add(group);
         Assert.assertEquals(after.size(), before.size());
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
+        System.out.println("before ---> " + before);
+        System.out.println("after ---> " + after);
     }
 
 
