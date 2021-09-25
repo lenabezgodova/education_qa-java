@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupDeletionTest extends TestBase {
@@ -20,15 +21,16 @@ public class GroupDeletionTest extends TestBase {
 
     @Test
     public void testGroupDeletion() throws InterruptedException {
-        List<GroupData> before = app.group().list();
-        int index = before.size() - 1;
+        Set<GroupData> before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        System.out.println("deletedGroup ----> " + deletedGroup);
 
-        app.group().delete(index);
-        List<GroupData> after = app.group().list();
-
+        //int index = before.size() - 1;
+        app.group().delete(deletedGroup);
+        Set<GroupData> after = app.group().all();
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
         Assert.assertEquals(after.size(),  before.size() - 1);
-        before.remove(index);
+        before.remove(deletedGroup); //удалять отсюда надо именно группу
         Assert.assertEquals(before, after);
 
         }

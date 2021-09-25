@@ -7,7 +7,9 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -78,6 +80,16 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        deteleSelectedGroups();
+        returnToGroupPage();
+    }
+
+    private void selectGroupById(int id) {
+        driver.findElement(By.cssSelector("input[value='" + id +"']")).click();
+    }
+
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
 
@@ -90,7 +102,6 @@ public class GroupHelper extends HelperBase {
 
     public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
-
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         System.out.println("elements:  " + elements);
         for (WebElement element : elements) {
@@ -98,13 +109,22 @@ public class GroupHelper extends HelperBase {
             //ищем внутри одного элемента другой элемент
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             groups.add(new GroupData().withId(id).withGroupName(name));
-            //System.out.println("-----------> " + name);
-            //System.out.println("-----------> " + group);
-            //System.out.println("-----------> " + group.getGroupName());
-            //System.out.println("-----------> " + group.getGroupFooter());
-            //System.out.println("*************************************** ");
         }
-
         return groups;
     }
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+        System.out.println("elements:  " + elements);
+        for (WebElement element : elements) {
+            String name = element.getText();
+            //ищем внутри одного элемента другой элемент
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withId(id).withGroupName(name));
+        }
+        return groups;
+    }
+
+
 }

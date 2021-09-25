@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -99,6 +101,17 @@ public class ContactHelper extends HelperBase{
         Thread.sleep(3000);
     }
 
+    public void delete(UserData user) throws InterruptedException {
+        selectUserById(user.getId());
+        deleteSelectedUser();
+        accertDialogWindow();
+        Thread.sleep(3000);
+    }
+
+    private void selectUserById(int id) {
+        driver.findElement(By.cssSelector("input[value='" + id +"']")).click();
+    }
+
     public boolean isThereAUser() {
         return isElementPresent(By.xpath("//img[@alt='Edit']"));
     }
@@ -127,16 +140,28 @@ public class ContactHelper extends HelperBase{
 
     public List<UserData> getListUsersWithInfo(){
         List<UserData> usersWithInfo = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
-
         List<WebElement> elements = driver.findElements(By.name("entry"));
 
         for (WebElement element: elements){
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String lastName = cells.get(1).getText();
             String name = cells.get(2).getText();
-            System.out.println("nameLast: " + lastName);
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            System.out.println("id: " + id);
+            UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
+            usersWithInfo.add(user);
+        }
+        return usersWithInfo;
+    }
+
+    public Set<UserData> all(){
+        Set<UserData> usersWithInfo = new HashSet<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
+        List<WebElement> elements = driver.findElements(By.name("entry"));
+
+        for (WebElement element: elements){
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String lastName = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
             usersWithInfo.add(user);
         }

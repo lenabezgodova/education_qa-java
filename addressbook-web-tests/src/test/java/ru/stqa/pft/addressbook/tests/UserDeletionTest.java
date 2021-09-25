@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
 
 import java.util.List;
+import java.util.Set;
 
 public class UserDeletionTest extends TestBase {
 
@@ -20,25 +21,23 @@ public class UserDeletionTest extends TestBase {
 
     @Test
     public void testDeletionGroup() throws InterruptedException {
+        Set<UserData> before = app.contact().all();
+        UserData deletedUser = before.iterator().next();
+        System.out.println("deletedUser ---> " + deletedUser);
 
-        List<UserData> before = app.contact().getListUsers();
-        int index = before.size()-1;
-
-        app.contact().delete(index);
+        //int index = before.size()-1;
+        app.contact().delete(deletedUser);
         app.goTo().pageHome();
         Thread.sleep(3000);
-        List<UserData> after = app.contact().getListUsers();
+        Set<UserData> after = app.contact().all();
 
-        //System.out.println("DeleteTest: Before: " + before);
-        //System.out.println("DeleteTest: After: " + after);
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
         Assert.assertEquals(after.size(), before.size()-1);
+        before.remove(deletedUser);
+        Assert.assertEquals(before, after);
 
-        before.remove(index);
-        System.out.println("DeleteTest:: this action was done - before.remove(before.size() - 1); ");
         System.out.println("DeleteTest: Before: " + before);
         System.out.println("DeleteTest: After: " + after);
-        Assert.assertEquals(before, after);
     }
 
 
