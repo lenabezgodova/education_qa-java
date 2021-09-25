@@ -4,28 +4,28 @@ import java.util.Objects;
 
 public class UserData {
 
-    private int id;
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private String group;
 
 
-    public UserData(String firstName, String middleName, String lastName, String group) {
-        this.id = 0;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.group = group;
-    }
-
-    public UserData(int id, String firstName, String middleName, String lastName, String group) {
-        this.id = id;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.group = group;
-    }
+//    public UserData(String firstName, String middleName, String lastName, String group) {
+//        this.id = 0;
+//        this.firstName = firstName;
+//        this.middleName = middleName;
+//        this.lastName = lastName;
+//        this.group = group;
+//    }
+//
+//    public UserData(int id, String firstName, String middleName, String lastName, String group) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.middleName = middleName;
+//        this.lastName = lastName;
+//        this.group = group;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -45,6 +45,31 @@ public class UserData {
 
     public int getId() {
         return id;
+    }
+
+    public UserData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public UserData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public UserData withMiddleName(String middleName) {
+        this.middleName = middleName;
+        return this;
+    }
+
+    public UserData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public  UserData withGroup(String group) {
+        this.group = group;
+        return this;
     }
 
     @Override

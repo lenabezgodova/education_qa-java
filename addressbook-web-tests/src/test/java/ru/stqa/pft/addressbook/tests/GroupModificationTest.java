@@ -12,8 +12,8 @@ public class GroupModificationTest extends TestBase {
 
     //подготовка состояния для тестов, которые отвечают за модификацию
     @BeforeMethod
-    public void enusrePreconditions(){
-        app.goTo().onGroupPage();
+    public void ensurePreconditions(){
+        app.goTo().groupPage();
         if (app.group().list().size() == 0) {
             app.group().create(new GroupData().withGroupName("Name").withGroupHeader("test1"));
         }

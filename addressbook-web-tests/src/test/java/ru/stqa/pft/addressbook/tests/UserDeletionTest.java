@@ -10,11 +10,11 @@ import java.util.List;
 public class UserDeletionTest extends TestBase {
 
     @BeforeTest
-    public void enusrePreconditions(){
-        app.goTo().onPageHome();
+    public void ensurePreconditions(){
+        app.goTo().pageHome();
 
         if (! app.contact().isThereAUser()){
-            app.contact().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
+            app.contact().createNewUser(new UserData().withFirstName("first name").withMiddleName("middle name").withLastName("last name").withGroup("test1"), true);
         }
     }
 
@@ -25,7 +25,7 @@ public class UserDeletionTest extends TestBase {
         int index = before.size()-1;
 
         app.contact().delete(index);
-        app.goTo().onPageHome();
+        app.goTo().pageHome();
         Thread.sleep(3000);
         List<UserData> after = app.contact().getListUsers();
 

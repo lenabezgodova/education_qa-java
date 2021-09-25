@@ -12,12 +12,12 @@ public class UserCreationTest extends TestBase{
 
     @Test
     public void testCreateUser() throws Exception {
-        app.goTo().onPageHome();
+        app.goTo().pageHome();
         //Thread.sleep(5000);
 
         List<UserData> before = app.contact().getListUsersWithInfo();
 
-        UserData user = new UserData("first name", null, "Zz-last name", "test1");
+        UserData user = new UserData().withFirstName("first name").withLastName("Zz-last name").withGroup("test1");
         app.contact().createNewUser(user, true);
         List<UserData> after = app.contact().getListUsersWithInfo();
 

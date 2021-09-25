@@ -119,9 +119,8 @@ public class ContactHelper extends HelperBase{
             WebElement element = driver.findElement(By.xpath(xPath));
             elements.add(element);
             String name = element.getText();
-            UserData user = new UserData(null, null, name, null);
+            UserData user = new UserData().withLastName(name);
             usersOnlyLatName.add(user);
-
         }
         return usersOnlyLatName;
     }
@@ -133,17 +132,14 @@ public class ContactHelper extends HelperBase{
 
         for (WebElement element: elements){
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String lastname = cells.get(1).getText();
+            String lastName = cells.get(1).getText();
             String name = cells.get(2).getText();
-            System.out.println("name: " + lastname);
+            System.out.println("nameLast: " + lastName);
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             System.out.println("id: " + id);
-            UserData user = new UserData(id, name, null, lastname, null);
+            UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
             usersWithInfo.add(user);
-
         }
-
         return usersWithInfo;
-
     }
 }

@@ -11,11 +11,11 @@ import java.util.List;
 public class UserModificationTest extends TestBase{
 
     @BeforeTest
-    public void enusrePreconditions(){
-        app.goTo().onPageHome();
+    public void ensurePreconditions(){
+        app.goTo().pageHome();
 
         if (! app.contact().isThereAUser()){
-            app.contact().createNewUser(new UserData("first name", "middle name", "last name", "test1"), true);
+            app.contact().createNewUser(new UserData().withFirstName("first name").withMiddleName("middle name").withLastName("last name").withGroup("test1"), true);
         }
     }
 
@@ -24,11 +24,11 @@ public class UserModificationTest extends TestBase{
 
         List<UserData> before = app.contact().getListUsersWithInfo();
         int index = before.size() - 1;
-        UserData user = new UserData(before.get(index).getId(), "Ivanov", "Ivan", "Ivanovich", null);
+        UserData user = new UserData().withId(before.get(index).getId()).withLastName("Ivanov").withMiddleName("Ivanovich").withFirstName("Ivan");
         System.out.println("before: size " + before.size() + " -->" + before);
 
         app.contact().modify(index, user);
-        app.goTo().onPageHome();
+        app.goTo().pageHome();
 
         List<UserData> after = app.contact().getListUsersWithInfo();
         System.out.println("after: " + after);

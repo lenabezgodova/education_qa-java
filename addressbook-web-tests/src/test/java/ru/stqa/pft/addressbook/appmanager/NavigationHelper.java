@@ -10,14 +10,14 @@ public class NavigationHelper extends HelperBase{
         super(driver);
     }
 
-    public void onGroupPage() {
+    public void groupPage() {
         if (isElementPresent(By.tagName("h1")) && driver.findElement(By.tagName("h1")).getText().equals("Groups") && isElementPresent(By.name("new"))) {
             return;
         }
         clickOnTheElement(By.linkText("groups"));
     }
 
-    public void onPageHome() {
+    public void pageHome() {
         if (isElementPresent(By.id("maintable"))){
             return;
         }
