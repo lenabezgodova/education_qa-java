@@ -74,7 +74,7 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public void delete(int index) {
+    public void deleteByIndex(int index) {
         selectGroup(index);
         deteleSelectedGroups();
         returnToGroupPage();
@@ -92,9 +92,7 @@ public class GroupHelper extends HelperBase {
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
-
     }
-
 
     public int getGroupCount() {
         return driver.findElements(By.name("selected[]")).size();

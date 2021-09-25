@@ -94,7 +94,7 @@ public class ContactHelper extends HelperBase{
         submitUserModification();
     }
 
-    public void delete(int index) throws InterruptedException {
+    public void deleteByIndex(int index) throws InterruptedException {
         selectUser(index);
         deleteSelectedUser();
         accertDialogWindow();

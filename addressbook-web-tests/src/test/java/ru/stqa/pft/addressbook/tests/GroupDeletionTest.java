@@ -32,7 +32,8 @@ public class GroupDeletionTest extends TestBase {
         Assert.assertEquals(after.size(),  before.size() - 1);
         before.remove(deletedGroup); //удалять отсюда надо именно группу
         Assert.assertEquals(before, after);
-
+        
+        System.out.println("after ---> " + after);
         }
 
 
