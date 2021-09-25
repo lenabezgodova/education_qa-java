@@ -14,7 +14,7 @@ public class UserDeletionTest extends TestBase {
     public void ensurePreconditions(){
         app.goTo().pageHome();
 
-        if (! app.contact().isThereAUser()){
+        if (app.contact().all().size() == 0){
             app.contact().createNewUser(new UserData().withFirstName("first name").withMiddleName("middle name").withLastName("last name").withGroup("test1"), true);
         }
     }

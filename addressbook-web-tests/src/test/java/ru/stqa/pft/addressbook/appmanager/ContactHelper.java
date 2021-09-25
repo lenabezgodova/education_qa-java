@@ -70,9 +70,12 @@ public class ContactHelper extends HelperBase{
         driver.switchTo().alert().dismiss();
     }
 
-    public void initUserModification(int index) {
-        //clickOnTheElement(By.xpath("//img[@alt='Edit']"));
+    public void initUserModify(int index) {
         driver.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    }
+
+    private void initUserModifyByID(int id) {
+        driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
     }
 
     public void submitUserModification() {
@@ -88,8 +91,8 @@ public class ContactHelper extends HelperBase{
         gotoHomePage();
     }
 
-    public void modify(int index, UserData user) {
-        initUserModification(index);
+    public void modify(UserData user) {
+        initUserModifyByID(user.getId());
         fullUserCreationForm(user, false);
         submitUserModification();
     }
@@ -120,23 +123,6 @@ public class ContactHelper extends HelperBase{
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<UserData> getListUsers() {
-
-        List<UserData> usersOnlyLatName = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже UserData - тип данных
-        int numberOfUsers = getUserCount();
-        System.out.println("numberOfUsers: " + numberOfUsers);
-        List<WebElement> elements = new ArrayList<WebElement>();
-
-        for (int i = 2; i <= numberOfUsers+1; i++){
-            String xPath = "//*[@id=\"maintable\"]/tbody/tr["+ i +"]/td[2]";
-            WebElement element = driver.findElement(By.xpath(xPath));
-            elements.add(element);
-            String name = element.getText();
-            UserData user = new UserData().withLastName(name);
-            usersOnlyLatName.add(user);
-        }
-        return usersOnlyLatName;
-    }
 
     public List<UserData> getListUsersWithInfo(){
         List<UserData> usersWithInfo = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
