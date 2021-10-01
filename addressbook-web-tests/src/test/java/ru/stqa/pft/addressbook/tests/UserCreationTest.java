@@ -23,13 +23,15 @@ public class UserCreationTest extends TestBase{
         Set<UserData> after = app.contact().all();
 
         //проверка на размер - пока отличается
+        System.out.println("before ---> " + before.size());
+        System.out.println("after  ---> " + after.size());
         Assert.assertEquals(after.size(), before.size() + 1);
 
         //сравниваем уже по-фамильно
         user.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
 
         before.add(user);
-        Assert.assertEquals(after.size(), before.size());
+        //Assert.assertEquals(after.size(), before.size());
         Assert.assertEquals(before, after);
         System.out.println("before ---> " + before);
         System.out.println("after  ---> " + after);

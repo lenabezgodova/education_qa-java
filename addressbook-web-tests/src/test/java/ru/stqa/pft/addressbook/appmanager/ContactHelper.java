@@ -150,6 +150,7 @@ public class ContactHelper extends HelperBase{
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
             usersWithInfo.add(user);
+            System.out.println("----->" + user);
         }
         return usersWithInfo;
     }
