@@ -14,6 +14,13 @@ public class UserData {
     private String workPhone;
     private String allPhones;
 
+    private String emailFirst;
+    private String emailSecond;
+    private String emailThird;
+    private String allEmails;
+
+    private String address;
+
 
 //    public UserData(String firstName, String middleName, String lastName, String group) {
 //        this.id = 0;
@@ -109,6 +116,51 @@ public class UserData {
 
     public UserData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getEmailFirst() {
+        return emailFirst;
+    }
+
+    public UserData withEmailFirst(String emailFirst) {
+        this.emailFirst = emailFirst;
+        return this;
+    }
+
+    public String getEmailSecond() {
+        return emailSecond;
+    }
+
+    public UserData withEmailSecond(String emailSecond) {
+        this.emailSecond = emailSecond;
+        return this;
+    }
+
+    public String getEmailThird() {
+        return emailThird;
+    }
+
+    public UserData withEmailThird(String emailThird) {
+        this.emailThird = emailThird;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public UserData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public UserData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
