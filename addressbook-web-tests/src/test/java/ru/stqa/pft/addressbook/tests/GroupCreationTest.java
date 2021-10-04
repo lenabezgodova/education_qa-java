@@ -16,8 +16,9 @@ public class GroupCreationTest extends TestBase {
         Groups before = app.group().all();
         GroupData group = new GroupData().withGroupName("test1");
         app.group().create(group);
+        assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
         Groups after = app.group().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
+        //assertThat(after.size(), equalTo(before.size() + 1));
 
         // another realization - how to find max value
 //        int maxLambda = after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId();
@@ -27,5 +28,6 @@ public class GroupCreationTest extends TestBase {
         System.out.println("after ----> " + after);
 
     }
+
 
 }

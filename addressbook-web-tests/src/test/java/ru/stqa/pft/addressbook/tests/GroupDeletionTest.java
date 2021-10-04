@@ -28,9 +28,9 @@ public class GroupDeletionTest extends TestBase {
 
         //int index = before.size() - 1;
         app.group().delete(deletedGroup);
+        assertThat(app.group().getGroupCount(), equalTo(before.size() - 1));
         Groups after = app.group().all();
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
-        Assert.assertEquals(after.size(),  before.size() - 1);
         assertThat(after, equalTo(before.without(deletedGroup)));
         assertThat(after.size(), equalTo(before.size()-1));
 
