@@ -5,10 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class GroupHelper extends HelperBase {
 
@@ -61,6 +59,7 @@ public class GroupHelper extends HelperBase {
         //здесь создается новый объект GroupData - сразу заполняются значения (есть же конструктор)
         fillGroupForm(groupData);
         submitGroupCreation("submit");
+        groupCash = null;
         returnToGroupPage();
 
     }
@@ -78,12 +77,14 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        groupCash = null;
         returnToGroupPage();
     }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deteleSelectedGroups();
+        groupCash = null;
         returnToGroupPage();
     }
 
@@ -99,18 +100,24 @@ public class GroupHelper extends HelperBase {
         return driver.findElements(By.name("selected[]")).size();
     }
 
+    private Groups groupCash = null;
+
 
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCash != null){
+            return new Groups(groupCash);
+        }
+
+        groupCash = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             //ищем внутри одного элемента другой элемент
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withGroupName(name));
+            groupCash.add(new GroupData().withId(id).withGroupName(name));
 
         }
-        return groups;
+        return new Groups(groupCash);
 
     }
 

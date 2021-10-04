@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.Users;
 
@@ -89,6 +90,7 @@ public class ContactHelper extends HelperBase{
         fullUserCreationForm(userData, b);
         workWithDropDownBox();
         submitUserCreation();
+        userCash = null;
         gotoHomePage();
     }
 
@@ -96,6 +98,7 @@ public class ContactHelper extends HelperBase{
         initUserModifyByID(user.getId());
         fullUserCreationForm(user, false);
         submitUserModification();
+        userCash = null;
     }
 
     public void deleteByIndex(int index) throws InterruptedException {
@@ -103,12 +106,14 @@ public class ContactHelper extends HelperBase{
         deleteSelectedUser();
         accertDialogWindow();
         Thread.sleep(3000);
+        userCash = null;
     }
 
     public void delete(UserData user) throws InterruptedException {
         selectUserById(user.getId());
         deleteSelectedUser();
         accertDialogWindow();
+        userCash = null;
         Thread.sleep(3000);
     }
 
@@ -140,8 +145,14 @@ public class ContactHelper extends HelperBase{
         return usersWithInfo;
     }
 
+    private Users userCash = null;
+
     public Users all(){
-        Users usersWithInfo = new Users();
+        if (userCash != null){
+            return new Users(userCash);
+        }
+
+        userCash = new Users();
         List<WebElement> elements = driver.findElements(By.name("entry"));
 
         for (WebElement element: elements){
@@ -150,9 +161,9 @@ public class ContactHelper extends HelperBase{
             String name = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
-            usersWithInfo.add(user);
+            userCash.add(user);
             System.out.println("----->" + user);
         }
-        return usersWithInfo;
+        return new Users(userCash);
     }
 }
