@@ -4,9 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
+import ru.stqa.pft.addressbook.model.Users;
 
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserDeletionTest extends TestBase {
 
@@ -21,7 +25,7 @@ public class UserDeletionTest extends TestBase {
 
     @Test
     public void testDeletionGroup() throws InterruptedException {
-        Set<UserData> before = app.contact().all();
+        Users before = app.contact().all();
         UserData deletedUser = before.iterator().next();
         System.out.println("deletedUser ---> " + deletedUser);
 
@@ -29,16 +33,15 @@ public class UserDeletionTest extends TestBase {
         app.contact().delete(deletedUser);
         app.goTo().pageHome();
         Thread.sleep(3000);
-        Set<UserData> after = app.contact().all();
+        Users after = app.contact().all();
 
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
         Assert.assertEquals(after.size(), before.size()-1);
-        before.remove(deletedUser);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(deletedUser)));
+        assertThat(after.size(), equalTo(before.size()-1));
 
         System.out.println("DeleteTest: Before: " + before);
         System.out.println("DeleteTest: After: " + after);
     }
-
 
 }

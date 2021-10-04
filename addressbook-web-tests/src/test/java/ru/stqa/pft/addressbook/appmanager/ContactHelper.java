@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
+import ru.stqa.pft.addressbook.model.Users;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -139,8 +140,8 @@ public class ContactHelper extends HelperBase{
         return usersWithInfo;
     }
 
-    public Set<UserData> all(){
-        Set<UserData> usersWithInfo = new HashSet<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
+    public Users all(){
+        Users usersWithInfo = new Users();
         List<WebElement> elements = driver.findElements(By.name("entry"));
 
         for (WebElement element: elements){

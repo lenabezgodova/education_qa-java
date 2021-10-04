@@ -31,7 +31,6 @@ public class Groups extends ForwardingSet<GroupData> {
     }
 
     public Groups without(GroupData group){
-        //выдает новый объект, с добавленной новой группой
         Groups groups = new Groups(this); //конструктор будет строить копию
         groups.remove(group);
         return groups;
