@@ -42,6 +42,7 @@ public class ContactHelper extends HelperBase{
         typeValueInTheField(By.name("firstname"), userData.getFirstName());
         typeValueInTheField(By.name("middlename"),userData.getMiddleName());
         typeValueInTheField(By.name("lastname"), userData.getLastName());
+        attach(By.name("photo"), userData.getPhoto());
 
         if (creation){
             new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
@@ -91,7 +92,7 @@ public class ContactHelper extends HelperBase{
         workWithDropDownBox();
         submitUserCreation();
         userCash = null;
-        gotoHomePage();
+
     }
 
     public void modify(UserData user) {
@@ -154,7 +155,6 @@ public class ContactHelper extends HelperBase{
 
         userCash = new Users();
         List<WebElement> elements = driver.findElements(By.name("entry"));
-
         for (WebElement element: elements){
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String lastName = cells.get(1).getText();
