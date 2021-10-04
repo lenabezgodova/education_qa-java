@@ -9,6 +9,10 @@ public class UserData {
     private String middleName;
     private String lastName;
     private String group;
+    private String home;
+    private String mobile;
+    private String workPhone;
+    private String allPhones;
 
 
 //    public UserData(String firstName, String middleName, String lastName, String group) {
@@ -67,8 +71,44 @@ public class UserData {
         return this;
     }
 
-    public  UserData withGroup(String group) {
+    public UserData withGroup(String group) {
         this.group = group;
+        return this;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public UserData withHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public UserData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public UserData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public UserData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
@@ -77,7 +117,12 @@ public class UserData {
         return "UserData{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", group='" + group + '\'' +
+                ", home='" + home + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", workPhone='" + workPhone + '\'' +
                 '}';
     }
 

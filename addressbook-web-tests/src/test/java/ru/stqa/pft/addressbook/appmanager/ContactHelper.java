@@ -159,11 +159,29 @@ public class ContactHelper extends HelperBase{
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String lastName = cells.get(1).getText();
             String name = cells.get(2).getText();
+            String allPhones = cells.get(5).getText();
+            String[] phones = allPhones.split("\n"); //перенос строки
+
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name);
+            UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name)
+                    .withAllPhones(allPhones);
             userCash.add(user);
             System.out.println("----->" + user);
         }
         return new Users(userCash);
+    }
+
+    public UserData infoFromEditForm(UserData user) {
+        selectUserById(user.getId()); //выбираю чек-бокс
+        initUserModifyByID(user.getId()); //сразу кликаю на карандаш. Открывается форма редактирования
+        String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+        String home = driver.findElement(By.name("home")).getAttribute("value");
+        String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
+        String work = driver.findElement(By.name("work")).getAttribute("value");
+        driver.navigate().back();
+
+        return new UserData().withId(user.getId()).withFirstName(firstname).withLastName(lastname).withHome(home)
+                .withMobile(mobile).withWorkPhone(work);
     }
 }

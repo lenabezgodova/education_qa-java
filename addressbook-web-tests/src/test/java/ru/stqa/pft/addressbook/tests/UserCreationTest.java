@@ -19,14 +19,10 @@ public class UserCreationTest extends TestBase{
 
         UserData user = new UserData().withFirstName("first name").withLastName("Zz-last name").withGroup("test1");
         app.contact().createNewUser(user, true);
+        assertThat(app.contact().getUserCount(), equalTo(before.size() + 1));
         Users after = app.contact().all();
 
-        //проверка на размер - пока отличается
-        System.out.println("before ---> " + before.size());
-        System.out.println("after  ---> " + after.size());
-        //Assert.assertEquals(after.size(), before.size() + 1);
         assertThat(after.size(), equalTo(before.size() + 1));
-
         assertThat(after, equalTo(before.withAdded(user.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         System.out.println("before ---> " + before);
         System.out.println("after  ---> " + after);
