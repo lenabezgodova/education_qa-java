@@ -6,25 +6,4 @@
     <group>test1</group>
     <workPhone>+7980(100)5650</workPhone>
   </users>
-  <users>
-    <firstName>test 1</firstName>
-    <middleName>footer 1</middleName>
-    <lastName>header 1</lastName>
-    <group>test1</group>
-    <workPhone>+7980(100)5651</workPhone>
-  </users>
-  <users>
-    <firstName>test 2</firstName>
-    <middleName>footer 2</middleName>
-    <lastName>header 2</lastName>
-    <group>test1</group>
-    <workPhone>+7980(100)5652</workPhone>
-  </users>
-  <users>
-    <firstName>test 3</firstName>
-    <middleName>footer 3</middleName>
-    <lastName>header 3</lastName>
-    <group>test1</group>
-    <workPhone>+7980(100)5653</workPhone>
-  </users>
 </list>

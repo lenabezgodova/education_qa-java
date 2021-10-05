@@ -10,7 +10,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManger;
 public class TestBase {
 
 
-    protected static  final ApplicationManger app = new ApplicationManger(BrowserType.FIREFOX);
+    protected static  final ApplicationManger app = new ApplicationManger(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
