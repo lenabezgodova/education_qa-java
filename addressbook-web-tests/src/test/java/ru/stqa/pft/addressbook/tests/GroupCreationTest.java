@@ -4,8 +4,6 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
-
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,9 +43,7 @@ public class GroupCreationTest extends TestBase {
         xStream.processAnnotations(GroupData.class);
         List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-
     }
-
 
     @Test(dataProvider = "validGroupsFromXML")
     public void testGroupCreation(GroupData group) {
@@ -56,8 +52,6 @@ public class GroupCreationTest extends TestBase {
         app.group().create(group);
         assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
         Groups after = app.group().all();
-        // another realization - how to find max value
-//        int maxLambda = after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId();
         assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         System.out.println("before --->" + before);
         System.out.println("after ----> " + after);
