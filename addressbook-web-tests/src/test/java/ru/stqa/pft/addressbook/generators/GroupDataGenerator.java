@@ -50,6 +50,11 @@ public class GroupDataGenerator {
     }
 
     private void saveAsXml(List<GroupData> groups, File file) throws IOException {
+//        //TODO
+//        XStream xStream = new XStream();
+//        xStream.allowTypes(new Class[]{ GroupData.class });
+//        xStream.processAnnotations(GroupData.class);
+
         XStream xstream = new XStream();
         xstream.processAnnotations(GroupData.class);
         //xstream.alias("group", GroupData.class);
