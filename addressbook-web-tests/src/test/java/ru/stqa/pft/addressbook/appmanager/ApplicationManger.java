@@ -24,6 +24,7 @@ public class ApplicationManger {
     private NavigationHelper navigationHelper;
     private SessionHelper sessionHelper;
     private ContactHelper contactHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManger(String browser) {
         this.browser = browser;
@@ -34,6 +35,8 @@ public class ApplicationManger {
     public void init() throws InterruptedException, IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+        dbHelper = new DbHelper();
 
         if (browser.equals(BrowserType.FIREFOX)){
             System.setProperty("webdriver.gecko.driver", "C:\\Users\\lenab\\IdeaProjects\\education_qa-java\\addressbook-web-tests\\drivers\\geckodriver.exe");
@@ -80,5 +83,9 @@ public class ApplicationManger {
 
     public ContactHelper contact(){
         return contactHelper;
+    }
+
+    public DbHelper db(){
+        return dbHelper;
     }
 }

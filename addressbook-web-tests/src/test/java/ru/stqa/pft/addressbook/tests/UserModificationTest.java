@@ -12,30 +12,30 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class UserModificationTest extends TestBase{
 
     @BeforeTest
-    public void ensurePreconditions() {
-        app.goTo().pageHome();
-
-        if (app.contact().all().size() == 0){
-            app.contact().createNewUser(new UserData().withFirstName("first name").withMiddleName("middle name").withLastName("last name").withGroup("test1"), true);
+    public void ensurePreconditions(){
+        if (app.db().users().size() == 0){
+            app.goTo().pageHome();
+            app.contact().createNewUser(new UserData().withFirstName("first name").withMiddleName("middle name")
+                    .withLastName("last name").withGroup("test1"), true);
         }
     }
 
     @Test
-    public void testUpdateUser() throws Exception {
+    public void testUpdateUser(){
 
-        Users before = app.contact().all();
+        Users before = app.db().users();
         UserData modifiedUser = before.iterator().next();
         System.out.println("modifiedUser ---> " + modifiedUser);
 
-        UserData user = new UserData().withId(modifiedUser.getId()).withLastName("Ivanov").withMiddleName("Ivanovich").withFirstName("Ivan");
+        UserData user = new UserData().withId(modifiedUser.getId()).withLastName("Ivanov").withMiddleName("Ivanovich")
+                .withFirstName("Ivan").withMobile("900-800-700").withHome("456-00-90").withEmailFirst("email@ru.com")
+                .withEmailSecond("secondemail@gmail.com");
 
         app.contact().modify(user);
         app.goTo().pageHome();
 
-        Users after = app.contact().all();
-
+        Users after = app.db().users();
         Assert.assertEquals(after.size(), before.size());
-
         assertThat(after, equalTo(before.without(modifiedUser).withAdded(user)));
         System.out.println("Before> " + after);
         System.out.println("After> " + after);

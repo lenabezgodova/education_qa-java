@@ -54,7 +54,6 @@ public class UserData {
     @Transient
     private File photo;
 
-
 //    public UserData(String firstName, String middleName, String lastName, String group) {
 //        this.id = 0;
 //        this.firstName = firstName;

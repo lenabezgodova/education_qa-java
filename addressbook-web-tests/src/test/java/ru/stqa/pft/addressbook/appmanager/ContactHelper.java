@@ -42,6 +42,13 @@ public class ContactHelper extends HelperBase{
         typeValueInTheField(By.name("firstname"), userData.getFirstName());
         typeValueInTheField(By.name("middlename"),userData.getMiddleName());
         typeValueInTheField(By.name("lastname"), userData.getLastName());
+        typeValueInTheField(By.name("address"),userData.getAddress());
+        typeValueInTheField(By.name("home"),userData.getHome());
+        typeValueInTheField(By.name("mobile"),userData.getMobile());
+        typeValueInTheField(By.name("work"),userData.getWorkPhone());
+        typeValueInTheField(By.name("email"),userData.getEmailFirst());
+        typeValueInTheField(By.name("email2"),userData.getEmailSecond());
+        typeValueInTheField(By.name("email3"),userData.getEmailThird());
         attach(By.name("photo"), userData.getPhoto());
 
         if (creation){
@@ -168,7 +175,7 @@ public class ContactHelper extends HelperBase{
             UserData user = new UserData().withId(id).withLastName(lastName).withFirstName(name)
                     .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address);
             userCash.add(user);
-            System.out.println("----->" + user);
+            //System.out.println("----->" + user);
         }
         return new Users(userCash);
     }

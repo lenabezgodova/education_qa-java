@@ -1,9 +1,16 @@
 <list>
   <users>
-    <firstName>test 0</firstName>
-    <middleName>footer 0</middleName>
-    <lastName>header 0</lastName>
+    <firstName>First Name 0</firstName>
+    <middleName>Middle Name 0</middleName>
+    <lastName>Last name 0</lastName>
     <group>test1</group>
     <workPhone>+7980(100)5650</workPhone>
+  </users>
+  <users>
+    <firstName>First Name 1</firstName>
+    <middleName>Middle Name 1</middleName>
+    <lastName>Last name 1</lastName>
+    <group>test1</group>
+    <workPhone>+7980(100)5651</workPhone>
   </users>
 </list>

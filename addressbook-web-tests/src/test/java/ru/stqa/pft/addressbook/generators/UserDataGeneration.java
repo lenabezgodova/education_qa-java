@@ -21,6 +21,8 @@ public class UserDataGeneration {
     public String file;
     @Parameter(names = "-d", description = "Data format")
     public String format;
+    // -c 2 -f src/test/resources/users.xml -d xml
+    // working directory C:\Users\lenab\IdeaProjects\education_qa-java\addressbook-web-tests
 
     public static void main(String[] args) throws IOException {
         UserDataGeneration generator = new UserDataGeneration();
@@ -68,9 +70,9 @@ public class UserDataGeneration {
         List<UserData> users = new ArrayList<UserData>();
 
         for (int i = 0; i < count; i++){
-            users.add(new UserData().withFirstName(String.format("test %s", i))
-                    .withLastName(String.format("header %s", i))
-                    .withMiddleName(String.format("footer %s", i))
+            users.add(new UserData().withFirstName(String.format("First Name %s", i))
+                    .withLastName(String.format("Last name %s", i))
+                    .withMiddleName(String.format("Middle Name %s", i))
                     .withGroup("test1")
                     .withWorkPhone(String.format("+7980(100)565%s", i)));
         }

@@ -5,8 +5,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.Users;
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -43,12 +41,12 @@ public class UserCreationTest extends TestBase{
         File photo = new File("src/test/resources/photoName.jpg"); //относительный путь
 
         app.goTo().pageHome();
-        Users before = app.contact().all();
+        Users before = app.db().users();
         //UserData user = new UserData().withFirstName("first name").withLastName("Zz-last name").withGroup("test1");
         app.contact().createNewUser(user, true);
         app.goTo().pageHome();
         assertThat(app.contact().getUserCount(), equalTo(before.size() + 1));
-        Users after = app.contact().all();
+        Users after = app.db().users();
 
         assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(before.withAdded(user.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
