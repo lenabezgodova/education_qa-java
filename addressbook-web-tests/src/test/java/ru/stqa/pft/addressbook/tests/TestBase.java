@@ -11,6 +11,8 @@ import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManger;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
+import ru.stqa.pft.addressbook.model.UserData;
+import ru.stqa.pft.addressbook.model.Users;
 
 import javax.swing.*;
 import java.lang.reflect.Method;
@@ -61,6 +63,20 @@ public class TestBase {
 
         assertThat(uiGroups, equalTo(dbGroups.stream().map((g) -> new GroupData().withId(g.getId()).withGroupName(g.getGroupName()))
                 .collect(Collectors.toSet())));
+    }
+
+    public void verifyUserListInUI(){
+        Users dbUsers = app.db().users();
+        Users uiUsers = app.contact().all();
+        System.out.println("dbUsers---> " + dbUsers);
+        System.out.println("uiUsers---> " + uiUsers);
+
+        Set<UserData> dbUsers2 = dbUsers.stream().map((g) -> new UserData().withId(g.getId()).withFirstName(g.getFirstName())
+                .withLastName(g.getLastName())
+                .withAddress(g.getAddress()))
+                .collect(Collectors.toSet());
+        System.out.println("dbUsers2---> " + dbUsers2);
+        assertThat(uiUsers, equalTo(dbUsers2));
     }
 
 }

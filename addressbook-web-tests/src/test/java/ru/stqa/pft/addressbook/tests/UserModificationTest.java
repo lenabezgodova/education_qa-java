@@ -44,6 +44,8 @@ public class UserModificationTest extends TestBase{
         assertThat(after, equalTo(before.without(modifiedUser).withAdded(user)));
         System.out.println("Before> " + after);
 
+        verifyUserListInUI();
+
     }
 
 
