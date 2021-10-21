@@ -6,11 +6,4 @@
     <group>test1</group>
     <workPhone>+7980(100)5650</workPhone>
   </users>
-  <users>
-    <firstName>First Name 1</firstName>
-    <middleName>Middle Name 1</middleName>
-    <lastName>Last name 1</lastName>
-    <group>test1</group>
-    <workPhone>+7980(100)5651</workPhone>
-  </users>
 </list>

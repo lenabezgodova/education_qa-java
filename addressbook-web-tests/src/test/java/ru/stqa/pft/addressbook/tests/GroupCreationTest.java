@@ -56,5 +56,6 @@ public class GroupCreationTest extends TestBase {
         assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         System.out.println("before --->" + before);
         System.out.println("after ----> " + after);
+        verifyGroupListInUI();
     }
 }

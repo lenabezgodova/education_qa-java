@@ -32,6 +32,7 @@ public class GroupDeletionTest extends TestBase {
         //проверка размера - пока они отличаются,новый элемнт никуда не добавляла\удаляла
         assertThat(after, equalTo(before.without(deletedGroup)));
         assertThat(after.size(), equalTo(before.size()-1));
+        verifyGroupListInUI();
 
         System.out.println("after ---> " + after);
         }

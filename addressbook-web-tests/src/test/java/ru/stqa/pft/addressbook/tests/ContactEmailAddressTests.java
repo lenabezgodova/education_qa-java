@@ -12,20 +12,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactEmailAddressTests extends TestBase{
 
-    @BeforeMethod
-    public void ensurePreconditions() {
-        app.goTo().pageHome();
-        if (app.contact().all().size() == 0) {
-            app.contact().createNewUser(new UserData()
-                    .withFirstName("Elena").withLastName("Petrova")
-                    .withMobile("89515002001")
-                    .withHome("8940(900)1040")
-                    .withEmailFirst("test@mail.ru")
-                    .withEmailSecond("test2@nnn.ru")
-                    .withAddress("Mühlenstraße 66")
-                    .withGroup("test1"), true);
-        }
-    }
+//    @BeforeMethod
+//    public void ensurePreconditions() {
+//        app.goTo().pageHome();
+//        if (app.contact().all().size() == 0) {
+//            app.contact().createNewUser(new UserData()
+//                    .withFirstName("Elena").withLastName("Petrova")
+//                    .withMobile("89515002001")
+//                    .withHome("8940(900)1040")
+//                    .withEmailFirst("test@mail.ru")
+//                    .withEmailSecond("test2@nnn.ru")
+//                    .withAddress("Mühlenstraße 66")
+//                    .withGroup("test1"), true);
+//        }
+//    }
 
     @Test
     public void testContactEmails() throws Exception {

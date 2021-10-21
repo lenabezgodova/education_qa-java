@@ -6,7 +6,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("users")
 @Entity
@@ -22,8 +24,15 @@ public class UserData {
     private String middleName;
     @Column(name = "lastname")
     private String lastName;
-    @Transient
-    private String group;
+
+//    @Transient
+//    private String group;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     @Column(name = "home")
     @Type(type = "text")
     private String home;
@@ -70,6 +79,15 @@ public class UserData {
 //        this.group = group;
 //    }
 
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    public void setGroups(Set<GroupData> groups) {
+        this.groups = groups;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -80,10 +98,6 @@ public class UserData {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getGroup() {
-        return group;
     }
 
     public int getId() {
@@ -107,11 +121,6 @@ public class UserData {
 
     public UserData withLastName(String lastName) {
         this.lastName = lastName;
-        return this;
-    }
-
-    public UserData withGroup(String group) {
-        this.group = group;
         return this;
     }
 
@@ -206,20 +215,6 @@ public class UserData {
     }
 
     @Override
-    public String toString() {
-        return "UserData{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", group='" + group + '\'' +
-                ", home='" + home + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", workPhone='" + workPhone + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -227,10 +222,33 @@ public class UserData {
         return id == userData.id &&
                 Objects.equals(firstName, userData.firstName) &&
                 Objects.equals(lastName, userData.lastName);
+                //Objects.equals(home, userData.home);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
+    }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", groups=" + groups +
+                ", home='" + home + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", emailFirst='" + emailFirst + '\'' +
+                ", emailSecond='" + emailSecond + '\'' +
+                ", emailThird='" + emailThird + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+    public UserData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

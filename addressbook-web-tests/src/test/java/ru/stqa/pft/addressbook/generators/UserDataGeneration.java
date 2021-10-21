@@ -61,7 +61,7 @@ public class UserDataGeneration {
         Writer writer = new FileWriter(file);
 
         for(UserData user: users){
-            writer.write(String.format("%s;%s;%s;%s;%s\n", user.getFirstName(), user.getLastName(), user.getMiddleName(), user.getGroup(), user.getWorkPhone()));
+            writer.write(String.format("%s;%s;%s;%s;%s\n", user.getFirstName(), user.getLastName(), user.getMiddleName(), user.getWorkPhone()));
         }
         writer.close();
     }
@@ -73,7 +73,6 @@ public class UserDataGeneration {
             users.add(new UserData().withFirstName(String.format("First Name %s", i))
                     .withLastName(String.format("Last name %s", i))
                     .withMiddleName(String.format("Middle Name %s", i))
-                    .withGroup("test1")
                     .withWorkPhone(String.format("+7980(100)565%s", i)));
         }
         return users;
