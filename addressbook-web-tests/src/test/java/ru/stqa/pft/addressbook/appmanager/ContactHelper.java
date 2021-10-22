@@ -5,14 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.Users;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Time;
+import java.util.*;
 
 public class ContactHelper extends HelperBase{
 
@@ -201,5 +200,24 @@ public class ContactHelper extends HelperBase{
 
         return new UserData().withId(user.getId()).withFirstName(firstname).withLastName(lastname).withHome(home)
                 .withMobile(mobile).withWorkPhone(work).withEmailFirst(email1).withEmailSecond(email2).withEmailThird(email3).withAddress(address);
+    }
+
+
+    public void addUserToGroup(UserData user, GroupData groupToAdd) throws InterruptedException {
+        selectUserById(user.getId()); //выбираю чек-бокс
+
+        selectGroupByName(groupToAdd.getGroupName());
+        Thread.sleep(3000);
+
+
+        driver.findElement(By.name("add")).click();
+        Thread.sleep(3000);
+        gotoHomePage();
+        userCash = null;
+    }
+
+    public void selectGroupByName(String name) {
+        new Select(driver.findElement(By.name("to_group"))).selectByVisibleText(name);
+
     }
 }
