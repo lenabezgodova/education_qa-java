@@ -4,7 +4,6 @@ import com.google.common.collect.ForwardingSet;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Users extends ForwardingSet<UserData> {
@@ -39,5 +38,16 @@ public class Users extends ForwardingSet<UserData> {
         Users users = new Users(this); //конструктор будет строить копию
         users.remove(user);
         return users;
+    }
+
+    public UserData getUserInfo(UserData contact) {
+        UserData user = null;
+        for(UserData contactData : delegate){
+            if(contactData.getId() == contact.getId()){
+                user = contactData;
+                break;
+            }
+        }
+        return user;
     }
 }

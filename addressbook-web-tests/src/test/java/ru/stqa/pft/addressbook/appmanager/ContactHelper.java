@@ -205,11 +205,8 @@ public class ContactHelper extends HelperBase{
 
     public void addUserToGroup(UserData user, GroupData groupToAdd) throws InterruptedException {
         selectUserById(user.getId()); //выбираю чек-бокс
-
         selectGroupByName(groupToAdd.getGroupName());
         Thread.sleep(3000);
-
-
         driver.findElement(By.name("add")).click();
         Thread.sleep(3000);
         gotoHomePage();
@@ -219,5 +216,23 @@ public class ContactHelper extends HelperBase{
     public void selectGroupByName(String name) {
         new Select(driver.findElement(By.name("to_group"))).selectByVisibleText(name);
 
+    }
+    // если выбрать группу из списка до таблицы - сработает сортировка
+    public void selectGroupByNameBeforeTable(String name) {
+        new Select(driver.findElement(By.name("group"))).selectByVisibleText(name);
+
+    }
+
+    public void removeFromGroup(UserData user, GroupData group) throws InterruptedException {
+        selectGroupByNameBeforeTable(group.getGroupName());
+        selectUserById(user.getId());
+        selectGroupByName(group.getGroupName());
+        Thread.sleep(3000);
+        removeGroup(); //submit "remove group" button
+        userCash = null;
+    }
+
+    public void removeGroup() {
+        driver.findElement(By.name("remove")).click();
     }
 }

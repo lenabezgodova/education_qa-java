@@ -26,27 +26,18 @@ public class AddUserToGroupTests extends TestBase {
 
     @Test
     void addUserToGroupTest() throws InterruptedException {
-        //выбираю пользователя, которого буду добавлять в группу
         UserData user = app.db().users().iterator().next();
         System.out.println("user ---> " + user);
-        //нужен список всех групп
         Groups allGroups = app.db().groups();
-        //нужен список групп, в которые пользовательуже добавлен
         Groups userGroups = user.getGroups();
-        System.out.println("userGroups ---> " + userGroups);
 
         GroupData groupToAdd = getGroupDataToAdd(allGroups, userGroups);
-        System.out.println("groupToAdd ---> " + groupToAdd);
-
         app.contact().addUserToGroup(user, groupToAdd);
-
         Groups userGroupsAfter = user.getGroups();
         System.out.println("userGroupsAfter ---> " + userGroupsAfter);
 
         assertThat(userGroupsAfter.size(), equalTo(user.getGroups().size() + 1));
 
-        //need to find max ID in groups after a new group creation
-        //assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         int maxIdGroups = userGroupsAfter.stream()
                 .mapToInt(g -> g.getId())
                 .max()
