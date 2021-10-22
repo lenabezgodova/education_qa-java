@@ -50,13 +50,12 @@ public class RemoveUserFromGroupTests extends TestBase {
         System.out.println("deletedGroup: ------- " + deletedGroup);
         app.contact().removeFromGroup(modifiedUser, deletedGroup);
         UserData afterDeletedGroup = app.db().users().getUserInfo(modifiedUser);
-        Groups groupsAfter = afterDeletedGroup.getGroups(); 
+        Groups groupsAfter = afterDeletedGroup.getGroups();
         System.out.println("groupsAfter: ------- " + groupsAfter);
 
         assertThat(groupsAfter.size(), equalTo(groupsBefore.size()-1));
         assertThat(groupsAfter, equalTo(groupsBefore.without(deletedGroup)));
 
     }
-
 
 }

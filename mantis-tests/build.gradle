@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 12
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.4.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    testImplementation group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
+}
+
+test {
+    useTestNG() {
+        suites 'src/test/resources/testng-groups.xml'
+        
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty('browser', "${browser}")
+    }
+    if (project.hasProperty('target')) {
+        systemProperty('target', "${target}")
+    }
+}
+
+
+
