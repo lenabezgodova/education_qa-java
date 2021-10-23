@@ -33,7 +33,7 @@ public class RegistrationTests extends TestBase {
         String confirmationLink = findConfirmationLink(mailMessages, email);
         System.out.println("confirmationLink ---> " + confirmationLink);
         app.registration().finish(confirmationLink, user, password);
-        assertTrue(app.newSession().login(user, password));
+        assertTrue(app.newSession().loginUser(user, password));
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {

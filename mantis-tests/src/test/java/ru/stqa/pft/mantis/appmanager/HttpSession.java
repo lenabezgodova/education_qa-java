@@ -25,7 +25,7 @@ public class HttpSession {
         httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }
 
-    public boolean login (String username, String password) throws IOException {
+    public boolean loginUser (String username, String password) throws IOException {
         HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("username", username));
@@ -35,9 +35,24 @@ public class HttpSession {
         post.setEntity(new UrlEncodedFormEntity(params));
         CloseableHttpResponse response = httpClient.execute(post);
         String body = getTextFrom(response);
-
         return body.contains(String.format("<a href=\"/mantisbt-2.25.2/account_page.php\">%s ( %s ) </a>", username, username));
         // return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+
+    }
+
+    public boolean loginAdmin (String username, String password) throws IOException {
+        HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("username", username));
+        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("secure_session", "on"));
+        params.add(new BasicNameValuePair("return", "index.php"));
+        post.setEntity(new UrlEncodedFormEntity(params));
+        CloseableHttpResponse response = httpClient.execute(post);
+        String body = getTextFrom(response);
+        return body.contains(String.format("<a href=\"/mantisbt-2.25.2/account_page.php\">%s</a>", username));
+        // return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+
     }
 
     private String getTextFrom(CloseableHttpResponse response) throws IOException {
@@ -52,7 +67,13 @@ public class HttpSession {
         HttpGet get = new HttpGet(app.getProperty("web.baseUrl")+ "/index.php");
         CloseableHttpResponse response = httpClient.execute(get);
         String body = getTextFrom(response);
-        // return body.contains(String.format("<a href=\"/mantisbt-2.25.2/account_page.php\">%s ( %s ) </a>", username, username));
-        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+
+        if (username == "administrator"){
+            return body.contains(String.format("<a href=\"/mantisbt-2.25.2/account_page.php\">%s</a>", username));
+        } else {
+            return body.contains(String.format("<a href=\"/mantisbt-2.25.2/account_page.php\">%s ( %s ) </a>", username, username));
+        }
+
+        //return body.contains(String.format("<span class=\"italic\">%s</span>", username));
     }
 }

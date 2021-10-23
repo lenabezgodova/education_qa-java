@@ -12,9 +12,9 @@ public class LoginTests extends TestBase{
     public void testLogin() throws IOException {
         HttpSession session = app.newSession();
 
-        //session.login("administrator", "root");
+        //session.loginAdmin("administrator", "root");
 
-        Assert.assertTrue(session.login("administrator", "root"));
+        Assert.assertTrue(session.loginAdmin("administrator", "root"));
         Assert.assertTrue(session.isLoggedInAs("administrator"));
 
     }
