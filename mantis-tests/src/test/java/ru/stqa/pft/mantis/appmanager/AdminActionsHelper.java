@@ -21,13 +21,12 @@ public class AdminActionsHelper extends HelperBase {
     }
 
     public void goToManagementPage(){
-        // link to the page http://localhost/mantisbt-2.25.2/manage_user_page.php
         driver.get(app.getProperty("web.baseUrl") + "manage_user_page.php");
     }
 
     public void clickOnTheUser(String username){
-       // <a href="manage_user_edit_page.php?user_id=7">user1635020592664</a>
-        // xpath //*[@id="main-container"]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr[6]/td[1]/a
+        String selector = "//a[text()='" + username + "']"; //a[text()='jjjj']
+        driver.findElement(By.xpath(selector)).click();
     }
 
 }

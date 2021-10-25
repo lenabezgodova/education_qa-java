@@ -19,9 +19,7 @@ public class ChangeUserPasswordTests extends TestBase{
     UserData userForResetPassword;
     String newPassword = "paSSword_new";
 
-    // TODO список пользователей со страницы!!!
-    // TODO реализация нажатия на нужного пользователя - сложный локатор поиска
-    // TODO вынести отсюда метод findConfirmationLink - дублируется в двух тестах
+    // TODO вынести метод findConfirmationLink - дублируется в двух тестах
 
     @BeforeMethod
     public void preconditions(){
@@ -30,8 +28,9 @@ public class ChangeUserPasswordTests extends TestBase{
 
         app.adminActionsHelper().loginAsAdmin();
         app.adminActionsHelper().goToManagementPage();
-
         List<UserData> usersWithInfo = app.userHelper().getListUsersWithInfo();
+        System.out.println("usersWithInfo --- " + usersWithInfo);
+
         userForResetPassword = usersWithInfo.iterator().next();
 
         app.adminActionsHelper().clickOnTheUser(userForResetPassword.getUsername());
@@ -40,7 +39,6 @@ public class ChangeUserPasswordTests extends TestBase{
 
     @Test
     public void testChangePass() throws IOException, ServiceException {
-        String newPass = "password_new";
 
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);//ждем 10 секунд
         String confirmationLink = findConfirmationLink(mailMessages, userForResetPassword.getEmail());
@@ -48,7 +46,7 @@ public class ChangeUserPasswordTests extends TestBase{
         app.registration().finish(confirmationLink, userForResetPassword.getUsername(), newPassword);
 
         HttpSession session = app.newSession();
-        assertTrue(session.loginUser(userForResetPassword.getUsername(), newPass));
+        assertTrue(session.loginUser(userForResetPassword.getUsername(), newPassword));
         assertTrue(session.isLoggedInAs(userForResetPassword.getUsername()));
     }
 

@@ -15,18 +15,23 @@ public class UserHelper extends HelperBase {
     }
 
 
+    private static final String ACCESS_LEVEL_Admin = "администратор";
+
     public List<UserData> getListUsersWithInfo(){
         List<UserData> usersWithInfo = new ArrayList<UserData>(); //здесь сразу нельзя добавить значения - см.ниже GroupData - тип данных
-        List<WebElement> elements = driver.findElements(By.name("tr"));
+        List<WebElement> elements = driver.findElements(By.cssSelector("table[class = 'table table-striped table-bordered table-condensed table-hover'] tbody tr"));
 
         for (WebElement element: elements){
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String username = cells.get(1).getText();
+            String usernameLink = cells.get(0).getText();
+            //String username = cells.get(1).getText();
             String email = cells.get(2).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String accessType = cells.get(3).getText();
+            if (!accessType.equals(ACCESS_LEVEL_Admin)){
+                UserData user = new UserData().withUsername(usernameLink).withEmail(email);
+                usersWithInfo.add(user);
+            }
 
-            UserData user = new UserData().withId(id).withUsername(username).withEmail(email);
-            usersWithInfo.add(user);
         }
         return usersWithInfo;
     }
