@@ -23,6 +23,7 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mail;
+    private SoapHelper soapHelper;
 
     private AdminActionsHelper adminActionsHelper;
     private UserHelper userHelper;
@@ -94,6 +95,13 @@ public class ApplicationManager {
             mail =  new MailHelper(this);
         }
         return mail;
+    }
+
+    public SoapHelper soapHelper() {
+        if (soapHelper == null){
+            soapHelper =  new SoapHelper(this);
+        }
+        return soapHelper;
     }
 
     public WebDriver getDriver(){
