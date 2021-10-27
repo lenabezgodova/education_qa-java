@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class ResTAssuredTests {
+public class ResTAssuredTests extends TestBase{
 
     @BeforeClass
     public void init() {
@@ -39,6 +39,12 @@ public class ResTAssuredTests {
         Assert.assertEquals(newIssues, oldIssues);
     }
 
+    @Test
+    public void test() throws IOException {
+        skipIfNotFixed(1537);
+
+    }
+
     private Set<Issue> getIssue() {
         String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
         JsonElement parsed = JsonParser.parseString(json);
@@ -49,8 +55,9 @@ public class ResTAssuredTests {
     private int createIssue(Issue newIssue) throws IOException {
         String json = RestAssured.given().parameter("subject", newIssue.getSubject())
                 .parameter("description", newIssue.getDescription())
+                .parameter("status", newIssue.getStatus())
                 .post("https://bugify.stqa.ru/api/issues.json").asString();
-        JsonElement parsed = JsonParser.parseString(json);;
+        JsonElement parsed = JsonParser.parseString(json);
         System.out.println("---->" + parsed);
         System.out.println("--->   " + parsed.getAsJsonObject().get("issue_id").getAsInt());
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
