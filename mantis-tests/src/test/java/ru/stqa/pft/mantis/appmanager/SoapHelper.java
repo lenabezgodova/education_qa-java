@@ -1,7 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
-import com.google.protobuf.ServiceException;
 import ru.stqa.pft.mantis.model.IssueInfo;
 import ru.stqa.pft.mantis.model.Project;
 
@@ -45,8 +44,6 @@ public class SoapHelper {
         MantisConnectPortType mc = new MantisConnectLocator()
                 .getMantisConnectPort(new URL(app.getProperty("soap.mantisConnectPortUrl")));
                 //.getMantisConnectPort(new URL("http://localhost/mantisbt-2.25.2/api/soap/mantisconnect.php"));
-
-
         return mc;
     }
 
@@ -57,7 +54,6 @@ public class SoapHelper {
 
         String[] categories =
                 mc.mc_project_get_categories(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), issue.getProject().getId());
-
 
         IssueData issueData = new IssueData(); //Класс из подключенной библиотеки Мантисс (9.3.) External Libraries
         issueData.setSummary(issue.getSummary());
