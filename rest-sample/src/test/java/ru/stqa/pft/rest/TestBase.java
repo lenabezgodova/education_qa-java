@@ -36,7 +36,7 @@ public class TestBase {
                 .getAsString();
 
         System.out.println("stateName " +  stateName );
-        
+
         return stateName.equals("Open");
     }
 
