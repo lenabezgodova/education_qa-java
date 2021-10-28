@@ -13,6 +13,7 @@ public class TestDistance {
 
         Assert.assertEquals(p1.distance(p2), 2.8284271247461903);
 
+
         assert p1.distance(p2) == 2.8284271247461903;
     }
 
