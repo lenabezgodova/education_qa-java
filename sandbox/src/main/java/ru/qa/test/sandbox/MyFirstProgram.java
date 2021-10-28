@@ -14,8 +14,8 @@ public class MyFirstProgram {
 
         System.out.println("FUNCTION: Distance between two coordinates: " +  distance(p1, p2));
 
-        System.out.println("METHOD: Distance between two coordinates: " +  p1.distance(p2));
-        System.out.println("METHOD: Distance between two coordinates: " +  p2.distance(p1));
+        //System.out.println("METHOD: Distance between two coordinates: " +  p1.distance(p2));
+        //System.out.println("METHOD: Distance between two coordinates: " +  p2.distance(p1));
 
     }
 

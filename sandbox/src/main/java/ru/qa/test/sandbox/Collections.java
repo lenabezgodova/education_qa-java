@@ -17,7 +17,7 @@ public class Collections {
             System.out.println(recordFromMassiv);
         }
 
-        List<String> languages = new ArrayList<String>(); //здесь сразу нельзя добавить значения - см.ниже
+        List<String> languages = new ArrayList<String>();
         languages.add("new lang");
         languages.add(0, "java");
 
@@ -25,11 +25,11 @@ public class Collections {
             System.out.println(recordFromMassiv);
         }
 
-        //если хочу сразу вписать значения
+
         List<String> listNew = Arrays.asList("Java", "Python", "PHP", "1C"); //list read only
         //listNew.add("Kotlin");
-        listNew.size(); //размер
-        listNew.get(0); //берем индекс
+        listNew.size();
+        listNew.get(0);
         System.out.println(listNew.get(0));
 
 
