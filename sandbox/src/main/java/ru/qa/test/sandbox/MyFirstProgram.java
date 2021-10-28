@@ -9,7 +9,7 @@ public class MyFirstProgram {
         System.out.println("Hello world");
 
 
-        var p1 = new Point(0, 0);
+        Point p1 = new Point(0, 0);
         Point p2 = new Point(2, 2);
 
         System.out.println("FUNCTION: Distance between two coordinates: " +  distance(p1, p2));
