@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.File;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class UserData {
     @JoinTable(name = "address_in_groups",
             joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<GroupData> groups = new HashSet<GroupData>();
+
 
     @Column(name = "home")
     @Type(type = "text")
@@ -63,6 +65,7 @@ public class UserData {
     @Transient
     private File photo;
 
+
 //    public UserData(String firstName, String middleName, String lastName, String group) {
 //        this.id = 0;
 //        this.firstName = firstName;
@@ -79,10 +82,6 @@ public class UserData {
 //        this.group = group;
 //    }
 
-
-    public Groups getGroups() {
-        return new Groups(groups);
-    }
 
     public void setGroups(Set<GroupData> groups) {
         this.groups = groups;
@@ -212,6 +211,10 @@ public class UserData {
     public UserData withPhoto(File photo) {
         this.photo = photo;
         return this;
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     @Override

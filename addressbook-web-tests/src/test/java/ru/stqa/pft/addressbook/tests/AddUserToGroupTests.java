@@ -6,6 +6,8 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.UserData;
 
+import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -28,16 +30,22 @@ public class AddUserToGroupTests extends TestBase {
     void addUserToGroupTest() throws InterruptedException {
         UserData user = app.db().users().iterator().next();
         System.out.println("user ---> " + user);
-        Groups allGroups = app.db().groups();
-        Groups userGroups = user.getGroups();
 
-        GroupData groupToAdd = getGroupDataToAdd(allGroups, userGroups);
+        Groups allGroups = app.db().groups();
+        Groups userGroupsBefore = user.getGroups();
+
+
+
+        GroupData groupToAdd = getGroupDataToAdd(allGroups, userGroupsBefore);
         app.contact().addUserToGroup(user, groupToAdd);
-        Groups userGroupsAfter = user.getGroups();
+
+
+        UserData userAfter = app.db().users().getUserInfo(user);
+        Groups userGroupsAfter = userAfter.getGroups();
+        //Groups userGroupsAfter = user.getGroups();
         System.out.println("userGroupsAfter ---> " + userGroupsAfter);
 
         assertThat(userGroupsAfter.size(), equalTo(user.getGroups().size() + 1));
-
         int maxIdGroups = userGroupsAfter.stream()
                 .mapToInt(g -> g.getId())
                 .max()
