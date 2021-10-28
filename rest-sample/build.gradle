@@ -1,37 +1,113 @@
-buildscript{
-    repositories{
-        jcenter()
-        mavenCentral()
-    }
+Failed
+ru.stqa.pft.addressbook.tests.GroupCreationTest.setUp
 
-    dependencies {
-        classpath "no.nils:wsdl2java:0.12"
-        classpath "org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:2.7.18"
-        classpath "org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:2.7.18"
-    }
-}
+Последние 3 сборки провалились (С #3 )
+Заняло 47 секунд.
+добавить описание
+Сообщение об ошибке
+org.openqa.selenium.WebDriverException: Unable to connect to host 127.0.0.1 on port 7055 after 45000 ms. Firefox console output:
 
-apply plugin: "java"
+Command duration or timeout: 45.29 seconds
+Стек вызовов
+org.openqa.selenium.WebDriverException: Unable to connect to host 127.0.0.1 on port 7055 after 45000 ms. Firefox console output:
 
-repositories {
-    mavenCentral()
-}
+Command duration or timeout: 45.29 seconds
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.JsonWireProtocolResponse.lambda$errorHandler$0(JsonWireProtocolResponse.java:54)
+	at org.openqa.selenium.remote.HandshakeResponse.lambda$getResponseFunction$0(HandshakeResponse.java:30)
+	at org.openqa.selenium.remote.ProtocolHandshake.lambda$createSession$0(ProtocolHandshake.java:126)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.tryAdvance(Spliterators.java:958)
+	at java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:126)
+	at java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:499)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:486)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:152)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:531)
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:128)
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:74)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:136)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:213)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:131)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:144)
+	at ru.stqa.pft.addressbook.appmanager.ApplicationManger.init(ApplicationManger.java:57)
+	at ru.stqa.pft.addressbook.tests.TestBase.setUp(TestBase.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:317)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:141)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:90)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: org.openqa.selenium.remote.ErrorHandler$UnknownServerException: Unable to connect to host 127.0.0.1 on port 7055 after 45000 ms. Firefox console output:
 
-version '1.0-SNAPSHOT'
-
-
-dependencies {
-    implementation 'org.testng:testng:7.4.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
-    implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
-    implementation 'com.jayway.restassured:rest-assured:2.9.0'
-}
-
-test {
-    useTestNG()
-}
-
-
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'LAPTOP-24HIR1R7', ip: '192.168.0.18', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_312'
+Driver info: driver.version: FirefoxDriver
+	at org.openqa.selenium.firefox.internal.NewProfileExtensionConnection.start(NewProfileExtensionConnection.java:112)
+	at org.openqa.selenium.firefox.FirefoxDriver.startClient(FirefoxDriver.java:271)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:119)
+	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:218)
+	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:211)
+	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:129)
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.server.FirefoxDriverProvider.callConstructor(FirefoxDriverProvider.java:91)
+	at org.openqa.selenium.remote.server.FirefoxDriverProvider.newInstance(FirefoxDriverProvider.java:68)
+	at org.openqa.selenium.remote.server.DefaultDriverFactory.newInstance(DefaultDriverFactory.java:60)
+	at org.openqa.selenium.remote.server.DefaultSession$BrowserCreator.call(DefaultSession.java:222)
+	at org.openqa.selenium.remote.server.DefaultSession$BrowserCreator.call(DefaultSession.java:1)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.lang.Thread.run(Thread.java:831)
+Стандартный вывод (STDOUT)
+14:54:22.817 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Stop test - testGroupCreation
+14:54:22.818 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Stop test - testGroupCreation
+14:54:22.819 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Stop test - testGroupCreation
+14:54:22.821 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Stop test - testGroupCreation
+Вывод ошибок (STDERR)
+Security framework of XStream not explicitly initialized, using predefined black list on your own risk.
 
 
